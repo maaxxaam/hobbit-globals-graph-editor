@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://cens3gp2ovpla"]
+
+[ext_resource type="Script" uid="uid://batqmwkaf10dc" path="res://main_rmb.gd" id="1_0gavk"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0gavk")
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+oversampling_override = 1.0
+size = Vector2i(127, 309)
+item_count = 13
+item_0/text = "New Trigger..."
+item_0/id = 0
+item_1/text = "New Action..."
+item_1/id = 1
+item_2/text = "New Link"
+item_2/id = 2
+item_3/id = 3
+item_3/separator = true
+item_4/text = "Undo"
+item_4/id = 9
+item_5/text = "Redo"
+item_5/id = 10
+item_6/id = 11
+item_6/separator = true
+item_7/text = "Find..."
+item_7/id = 12
+item_8/text = "Cut"
+item_8/id = 4
+item_9/text = "Copy"
+item_9/id = 5
+item_10/text = "Paste"
+item_10/id = 6
+item_11/text = "Select All"
+item_11/id = 7
+item_12/text = "Remove"
+item_12/id = 8
+
+[node name="AddActionSubMenu" type="PopupMenu" parent="PopupMenu"]
+item_count = 1
+item_0/text = "Hide/Show RigidInstance"
+item_0/id = 0
+
+[node name="AddTriggerSubMenu" type="PopupMenu" parent="PopupMenu"]
+item_count = 3
+item_0/text = "Quest Completed"
+item_0/id = 0
+item_1/text = "Stone thrown at NPC"
+item_1/id = 1
+item_2/text = "Using a rope"
+item_2/id = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="popup_hide" from="PopupMenu" to="." method="_on_popup_menu_popup_hide"]

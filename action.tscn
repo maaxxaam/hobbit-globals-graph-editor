@@ -1,0 +1,111 @@
+[gd_scene load_steps=2 format=3 uid="uid://blq6funnkillg"]
+
+[ext_resource type="Script" uid="uid://b31uw58dxk4t5" path="res://action.gd" id="1_a2i7p"]
+
+[node name="GraphNode2" type="GraphNode"]
+offset_right = 86.0
+offset_bottom = 78.0
+mouse_filter = 1
+position_offset = Vector2(457, 51)
+title = "Action102"
+ignore_invalid_connection_type = true
+slot/0/left_enabled = true
+slot/0/left_type = 1
+slot/0/left_color = Color(1, 1, 0, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color(1, 1, 1, 1)
+slot/4/left_icon = null
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color(1, 1, 1, 1)
+slot/4/right_icon = null
+slot/4/draw_stylebox = true
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color(1, 1, 1, 1)
+slot/5/left_icon = null
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color(1, 1, 1, 1)
+slot/5/right_icon = null
+slot/5/draw_stylebox = true
+script = ExtResource("1_a2i7p")
+
+[node name="ActionName" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "Enter Action name..."
+expand_to_text_length = true
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="ExecDelay" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ExecDelay"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Delay "
+
+[node name="SpinBox" type="SpinBox" parent="ExecDelay"]
+layout_mode = 2
+max_value = 3600.0
+page = 0.1
+custom_arrow_step = 0.1
+
+[node name="ExecImm" type="CheckBox" parent="."]
+layout_mode = 2
+text = "Execute immediately?"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="ActionType" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TypeIcon" type="TextureRect" parent="ActionType"]
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 4
+
+[node name="TypeDesc" type="Label" parent="ActionType"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChangeType" type="Button" parent="ActionType"]
+layout_mode = 2
+text = " Edit "

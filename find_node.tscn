@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://ble1btn658ycj"]
+
+[ext_resource type="Script" uid="uid://csj4gtwh6s0y5" path="res://find_node.gd" id="1_62lvk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7a4el"]
+bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="FindNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 500.0
+offset_top = 300.0
+offset_right = 500.0
+offset_bottom = 300.0
+script = ExtResource("1_62lvk")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -81.5
+offset_right = 141.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7a4el")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Find node"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="EditTitle" type="Label" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "  Search name:"
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+placeholder_text = " Node name or description..."
+
+[node name="FlagsRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CaseInsensitive" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow"]
+layout_mode = 2
+button_pressed = true
+text = "Case sensitive"
+
+[node name="UseRegex" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Use regex"
+
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="FindNext" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+layout_mode = 2
+text = " Find next "
+
+[node name="FindClose" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+layout_mode = 2
+text = " Find and close "
+
+[node name="Close" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+layout_mode = 2
+text = " Close "
