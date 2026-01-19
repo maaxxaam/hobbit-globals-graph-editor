@@ -1,11 +1,31 @@
 class_name PopupRMB extends Control
 
+signal _do_not_use
+signal select_all_requested
+signal find_requested
+signal remove_requested
+signal copy_requested
+signal cut_requested
+signal paste_requested
+signal undo_requested
+signal redo_requested
+signal new_link_requested
 
 @onready var popup_menu: PopupMenu = $PopupMenu
 @onready var action_submenu: PopupMenu = $PopupMenu/AddActionSubMenu
 @onready var trigger_submenu: PopupMenu = $PopupMenu/AddTriggerSubMenu
 var graph: GlobalsGraph
-
+var signal_map: Dictionary[int, Signal] = {
+	2: new_link_requested,
+	9: undo_requested,
+	10: redo_requested,
+	12: find_requested,
+	4: cut_requested,
+	5: copy_requested,
+	6: paste_requested,
+	7: select_all_requested,
+	8: remove_requested
+}
 
 func _ready():
 	popup_menu.set_item_submenu_node(0, trigger_submenu)
@@ -76,3 +96,8 @@ func check_menu_visibility():
 		popup_menu.set_item_disabled(8,  len(graph.selected_nodes) == 0)
 		popup_menu.set_item_disabled(9,  len(graph.selected_nodes) == 0)
 		popup_menu.set_item_disabled(12, len(graph.selected_nodes) == 0)
+
+
+func _on_popup_menu_index_pressed(index):
+	var ident := popup_menu.get_item_id(index)
+	(signal_map.get(ident, _do_not_use) as Signal).emit()

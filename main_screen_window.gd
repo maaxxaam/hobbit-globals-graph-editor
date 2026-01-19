@@ -13,6 +13,10 @@ func _ready():
 	match_size()
 	show()
 	popup.graph = Graph
+	popup.new_link_requested.connect(Graph.link_at_mouse)
+	popup.select_all_requested.connect(Graph.select_all)
+	popup.undo_requested.connect(Graph.undo_action)
+	popup.redo_requested.connect(Graph.redo_action)
 
 
 func _on_window_files_dropped(files: PackedStringArray):
@@ -27,16 +31,17 @@ func _on_window_files_dropped(files: PackedStringArray):
 		"txt":
 			parsed_data = GlobalsParser.parse_text(file)
 		_:
-			return # TODO: print a message on supported data formats
-	if parsed_data.has("Errors"):
-		var full_text: String = (parsed_data["Errors"] as Array[String]).reduce(func(accum: String, item: String): return accum + "\n" + item, "")
-		error_box.trigger_error()
-		if parsed_data.has("Abort"):
-			return
+			# TODO: print a proper user-faced message on supported data formats
+			push_error("Supported formats are [json, txt, export], got %s" % [extension])
+			parsed_data = { "Abort": [] }
+	error_box.trigger_error()
+	if parsed_data.has("Abort"):
+		return
 	# TODO: check if file is already opened and ask to save that one first
 	Graph.clear_all()
 	await get_tree().process_frame
 	Graph.from_parsed_data(parsed_data)
+	error_box.trigger_error()
 
 
 func match_size():

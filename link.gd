@@ -7,9 +7,9 @@ func export_before_components() -> Dictionary[String, Variant]:
 
 func export_after_components() -> Dictionary[String, Variant]:
 	var result: Dictionary[String, Variant] = {}
-	var connections := graph.get_connection_list_from_node(name)
-	var in_connections := connections.filter(func(item): return item["to_node"] == name).map(func(item): return item["from_node"])
-	var out_connections := connections.filter(func(item): return item["from_node"] == name).map(func(item): return item["to_node"])
+	var connections = graph.get_connection_list_from_node(name)
+	var in_connections = connections.filter(func(item): return item["to_node"] == name).map(func(item): return item["from_node"])
+	var out_connections = connections.filter(func(item): return item["from_node"] == name).map(func(item): return item["to_node"])
 	# Start with triggers first
 	var triggers: Array[int] = []
 	for item in in_connections:
@@ -36,7 +36,16 @@ func wrap_var_name(var_name: String) -> String:
 
 
 func _ready():
-	pass
+	component_name_map = {
+		"LinkRepeats": "Link Repeats? ",
+		"LogicType": "Logic type: ",
+		"LinkState": "Link state: "
+	}
+	component_params_map = {
+		"LogicType": {
+			"options": ["All triggers", "Any trigger"]
+		}
+	}
 
 
 func from_parsed(parsed_data: GlobalsParser.ParsedEntry):
@@ -55,6 +64,20 @@ func from_parsed(parsed_data: GlobalsParser.ParsedEntry):
 		return
 	if actions == null:
 		return
+	set_node_title(parsed_data.name)
+	new_parsed_component(AvailableComponents.Boolean, link_repeats)
+	new_parsed_component(AvailableComponents.Choice, link_state)
+	new_parsed_component(AvailableComponents.Choice, logic_type)
+	set_slot(0, true, 0, Color(1.0, 1.0, 1.0), true, 1, Color(1.0, 1.0, 0.0))
+
+
+func from_empty(_type: int):
+	node_class_index = graph.get_node_class_index("LinkNode")
+	title = "Link%s" % [node_class_index]
+	add_new_component(AvailableComponents.Boolean, "LinkRepeats")
+	add_new_component(AvailableComponents.Choice, "LinkState")
+	add_new_component(AvailableComponents.Choice, "LogicType")
+	set_slot(0, true, 0, Color(1.0, 1.0, 1.0), true, 1, Color(1.0, 1.0, 0.0))
 
 
 func get_component_default(type: AvailableComponents, _component_name: String):

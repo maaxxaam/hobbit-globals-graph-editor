@@ -2,6 +2,7 @@ class_name IntComponent extends EditComponent
 
 const DEBOUNCE_DURATION = 0.2
 @onready var debounce: Timer = $DebounceTimer
+@onready var name_label: Label = $Label
 var debounced_value: int
 var numberbox: SpinBox
 var default_params: Dictionary[String, Variant] = {
@@ -14,14 +15,21 @@ var default_params: Dictionary[String, Variant] = {
 	"unbounded_up": true
 }
 
+
+func _ready():
+	variable_default = 0
+
+
 func set_value(value: Variant):
 	if value is not int:
-		push_error("Expected int on assignment to value '%s', got %s" % [variable_name, typeof(value)])
+		push_error("Expected int on assignment to value '%s', got %s" % [variable_name, type_string(typeof(value))])
 		return
 	variable_value = value
 	numberbox.set_value_no_signal(value)
 
-func init_component(node: GlobalsGraphNodeBase, var_name: String, value: Variant, params: Dictionary[String, Variant] = default_params):
+func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, params: Dictionary = default_params):
+	variable_display_name = display_name
+	name_label.text = display_name
 	numberbox = $SpinBox
 	graph_node = node
 	variable_name = var_name
@@ -32,7 +40,7 @@ func init_component(node: GlobalsGraphNodeBase, var_name: String, value: Variant
 		numberbox.step = params.get("step", default_params["step"])
 		numberbox.custom_arrow_step = params.get("step", default_params["step"])
 		numberbox.allow_greater = params.get("unbounded_up", default_params["unbounded_up"])
-		numberbox.allow_less = params.get("unbounded_down", false)
+		numberbox.allow_lesser = params.get("unbounded_down", false)
 		numberbox.prefix = params.get("prefix", "")
 		numberbox.suffix = params.get("suffix", "")
 	set_value(value)

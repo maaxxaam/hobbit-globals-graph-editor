@@ -24,14 +24,18 @@ class ErrorBoxLogger extends Logger:
 	func _log_message(_message, _error):
 		pass  # Don't care about print() like messages
 
-	func _log_error(function, _file, _line, _code, rationale, _editor_notify, error_type, _script_backtraces):
+	func _log_error(function, _file, _line, code, rationale, _editor_notify, error_type, _script_backtraces):
 		if function_mapping.has(function):
 			function = function_mapping.get(function)
-		history.append("%s %s: %s" % [err_type_mapping.get(error_type), function, rationale])
+		history.append("%s%s: %s" % [err_type_mapping.get(error_type), "" if function == "push_error" else " " + function, code if len(code) > 0 else rationale])
 
 
 @onready var text_box: TextEdit = $PanelContainer/HBoxContainer/ScrollContainer/TextEdit
 var logger: ErrorBoxLogger
+
+
+func has_pending_errors() -> bool:
+	return logger.has_pending_errors()
 
 
 func _ready():

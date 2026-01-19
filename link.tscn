@@ -2,78 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dxsvsp61v5x4y" path="res://link.gd" id="1_hqdcc"]
 
-[node name="GraphNode3" type="GraphNode"]
+[node name="Link" type="GraphNode" groups=["LinkNode"]]
 offset_right = 69.0
 offset_bottom = 78.0
 size_flags_horizontal = 3
 mouse_filter = 1
 position_offset = Vector2(257, 103)
 title = "Link204"
-slot/0/left_enabled = true
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = true
-slot/0/right_type = 1
-slot/0/right_color = Color(1, 1, 0, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
-slot/1/left_enabled = false
-slot/1/left_type = 0
-slot/1/left_color = Color(1, 1, 1, 1)
-slot/1/left_icon = null
-slot/1/right_enabled = false
-slot/1/right_type = 0
-slot/1/right_color = Color(1, 1, 1, 1)
-slot/1/right_icon = null
-slot/1/draw_stylebox = true
-slot/2/left_enabled = false
-slot/2/left_type = 0
-slot/2/left_color = Color(1, 1, 1, 1)
-slot/2/left_icon = null
-slot/2/right_enabled = false
-slot/2/right_type = 0
-slot/2/right_color = Color(1, 1, 1, 1)
-slot/2/right_icon = null
-slot/2/draw_stylebox = true
 script = ExtResource("1_hqdcc")
-
-[node name="LinkRepeats" type="CheckBox" parent="."]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Link Repeats?"
-
-[node name="LogicType" type="HBoxContainer" parent="."]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="LogicType"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Logic Type "
-
-[node name="OptionButton" type="OptionButton" parent="LogicType"]
-layout_mode = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "All Triggers"
-popup/item_0/id = 0
-popup/item_1/text = "Any Trigger"
-popup/item_1/id = 1
-
-[node name="LinkState" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="LinkState"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Link State "
-
-[node name="OptionButton" type="OptionButton" parent="LinkState"]
-layout_mode = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "Enabled"
-popup/item_0/id = 0
-popup/item_1/text = "Disabled"
-popup/item_1/id = 1

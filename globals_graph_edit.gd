@@ -6,18 +6,15 @@ enum BufferModes {
 	COPY
 }
 
-var link_scene: Resource
-var action_scene: Resource
-var trigger_scene: Resource
+var link_scene: PackedScene
+var action_scene: PackedScene
+var trigger_scene: PackedScene
 var popup: PopupRMB
 var selected_nodes: Array[StringName]
-var buffered_nodes
+var last_action_node: GlobalsGraphNodeBase
+var buffered_nodes: Array[GlobalsGraphNodeBase]
 var buffer_mode: BufferModes
 var history: UndoRedo
-var popup_mapping: Dictionary[int, Callable] = {
-	9: undo_action,
-	10: redo_action
-}
 
 
 func _is_node_hover_valid(from, from_port, to, to_port):
@@ -40,23 +37,14 @@ func _ready():
 	add_valid_connection_type(0, 1)
 
 	await get_tree().process_frame
-	popup.popup_menu.id_pressed.connect(_on_rmb_popup_item)
-
-
-func _on_rmb_popup_item(id: int):
-	if id in popup_mapping:
-		print("Calling '%s'" % [popup_mapping[id].get_method()])
-		popup_mapping[id].call()
 
 
 func undo_action():
-	print("Tried undo!")
 	if history.has_undo():
 		history.undo()
 
 
 func redo_action():
-	print("Tried redo!")
 	if history.has_redo():
 		history.redo()
 
@@ -80,11 +68,7 @@ func _on_connection_request(from: StringName, from_port: int, to: StringName, to
 
 
 func _on_connection_drag_started(from, from_port, is_output):
-	var from_node: GraphNode = get_node(NodePath(from))
-	if is_output:
-		print("%s %s" % [from_port, from_node.get_output_port_type(from_port)])
-	else:
-		print("%s %s" % [from_port, from_node.get_input_port_type(from_port)])
+	pass
 
 
 func _on_disconnection_request(from_node, from_port, to_node, to_port):
@@ -106,19 +90,23 @@ func remove_connections_to_node(node):
 			disconnect_node(con.from_node, con.from_port, con.to_node, con.to_port)
 
 
-func _on_connection_from_empty(to, to_port, release_position):
-	var node: GraphNode = link_scene.instantiate()
+func link_spawn_at(pos: Vector2) -> LinkNode:
+	var node: GlobalsGraphNodeBase = link_scene.instantiate()
 	add_child(node)
 	node.set_owner(self)
-	node.position_offset = scroll_offset + release_position
+	node.position_offset = pos
+	node.link_graph(self)
+	node.from_empty(0)
+	return node as LinkNode
+
+
+func _on_connection_from_empty(to, to_port, release_position):
+	var node: LinkNode = link_spawn_at(scroll_offset + release_position)
 	connect_node(StringName(get_path_to(node)), 0, to, to_port, true)
 
 
 func _on_connection_to_empty(from, from_port, release_position):
-	var node: GraphNode = link_scene.instantiate()
-	add_child(node)
-	node.set_owner(self)
-	node.position_offset = scroll_offset + release_position
+	var node: LinkNode = link_spawn_at(scroll_offset + release_position)
 	connect_node(from, from_port, StringName(get_path_to(node)), 0, true)
 
 
@@ -179,8 +167,115 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 	var link_y: float = 0.0
 	var action_y: float = 0.0
 	var trigger_y: float = 0.0
+	# Start with a sorting prepass putting
+	# Isolated subgraphs with a single link on the bottom
+	var last_link_idx := len(parsed_data["Links"]) - 1
+	var idx := 0
+	while idx < last_link_idx:
+		var data = parsed_data["Links"][idx] as GlobalsParser.ParsedEntry
+		var orphan: bool = true
+		var items_t: Array = []
+		var items_a: Array = []
+		var pval = data.find_param_by_name("LinkTrigger")
+		if pval != null:
+			items_t = pval.value.duplicate()
+		pval = data.find_param_by_name("LinkAction")
+		if pval != null:
+			items_a = pval.value.duplicate()
+		if len(items_t) > 0 or len(items_a) > 0:
+			for item: GlobalsParser.ParsedEntry in parsed_data["Links"]:
+				if item.name == parsed_data["Links"][idx].name:
+					continue
+				var link_items_t: Array
+				var link_items_a: Array
+				pval = item.find_param_by_name("LinkTrigger")
+				if pval != null:
+					link_items_t = pval.value.duplicate()
+				pval = item.find_param_by_name("LinkAction")
+				if pval != null:
+					link_items_a = pval.value.duplicate()
+				for candidate in link_items_t:
+					for tester in items_t:
+						if candidate == tester:
+							orphan = false
+							break
+					if orphan == false:
+						break
+				for candidate in link_items_a:
+					for tester in items_a:
+						if candidate == tester:
+							orphan = false
+							break
+					if orphan == false:
+						break
+				if orphan == false:
+					break
+		if orphan:
+			var temp = parsed_data["Links"].get(idx)
+			parsed_data["Links"].set(idx, parsed_data["Links"].get(last_link_idx))
+			parsed_data["Links"].set(last_link_idx, temp)
+			last_link_idx -= 1
+		else:
+			idx += 1
+	# Second sorting prepass putting
+	# Remaining isolated subgraphs together
+	idx = 0
+	while idx < last_link_idx:
+		var data = parsed_data["Links"][idx] as GlobalsParser.ParsedEntry
+		var ids: Array[int] = [idx]
+		var items_t: Array = []
+		var items_a: Array = []
+		var pval = data.find_param_by_name("LinkTrigger")
+		if pval != null:
+			items_t = pval.value.duplicate()
+		pval = data.find_param_by_name("LinkAction")
+		if pval != null:
+			items_a = pval.value.duplicate()
+		prints(items_t, items_a)
+		for i in last_link_idx:
+			var item = parsed_data["Links"][i]
+			if item.name == parsed_data["Links"][idx].name:
+				continue
+			var skip := false
+			var link_items_t: Array
+			var link_items_a: Array
+			pval = item.find_param_by_name("LinkTrigger")
+			if pval != null:
+				link_items_t = pval.value.duplicate()
+			pval = item.find_param_by_name("LinkAction")
+			if pval != null:
+				link_items_a = pval.value.duplicate()
+			for candidate in link_items_t:
+				for tester in items_t:
+					if candidate == tester:
+						items_t.append_array(link_items_t)
+						items_a.append_array(link_items_a)
+						ids.append(i)
+						skip = true
+						break
+				if skip:
+					break
+			for candidate in link_items_a:
+				for tester in items_a:
+					if candidate == tester:
+						items_t.append_array(link_items_t)
+						items_a.append_array(link_items_a)
+						ids.append(i)
+						skip = true
+						break
+				if skip:
+					break
+			if skip:
+				break
+		for index in ids:
+			var temp = parsed_data["Links"].get(idx)
+			parsed_data["Links"].set(idx, parsed_data["Links"].get(last_link_idx))
+			parsed_data["Links"].set(last_link_idx, temp)
+			last_link_idx -= 1
+		idx += 1
+
 	for item: GlobalsParser.ParsedEntry in parsed_data["Links"]:
-		var new_node: GraphNode = link_from_parsed(item, Vector2(LINK_X, link_y))
+		var new_node: GraphNode = node_from_parsed(item, Vector2(LINK_X, link_y))
 		link_y += new_node.size.y + ITEM_SPACING
 		var pval: GlobalsParser.ParsedValue = item.find_param_by_name("LinkTrigger")
 		if pval == null:
@@ -189,7 +284,7 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 			var new_trigger: GraphNode = find_trigger_by_index(index)
 			if new_trigger == null:
 				var trigger_data: GlobalsParser.ParsedEntry = parsed_data["Triggers"][index]
-				new_trigger = trigger_from_parsed(trigger_data, Vector2(TRIGGER_X, trigger_y))
+				new_trigger = node_from_parsed(trigger_data, Vector2(TRIGGER_X, trigger_y))
 				trigger_y += new_trigger.size.y + ITEM_SPACING
 			connect_node(new_trigger.name, 0, new_node.name, 0, true)
 		pval = item.find_param_by_name("LinkAction")
@@ -199,99 +294,74 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 			var new_action: GraphNode = find_action_by_index(index)
 			if new_action == null:
 				var action_data: GlobalsParser.ParsedEntry = parsed_data["Actions"][index]
-				new_action = action_from_parsed(action_data, Vector2(ACTION_X, action_y))
+				new_action = node_from_parsed(action_data, Vector2(ACTION_X, action_y))
 				action_y += new_action.size.y + ITEM_SPACING
 			connect_node(new_node.name, 0, new_action.name, 0, true)
 		link_y = max(link_y, action_y, trigger_y)
 		action_y = link_y
 		trigger_y = link_y
+	# Since components do not affect node's size until next frame,
+	# reposition them next frame
+	await get_tree().process_frame
+	for item in get_tree().get_nodes_in_group("LinkNode"):
+		pass
 
-func find_trigger_by_index(index: int) -> GraphNode:
+
+func find_trigger_by_index(index: int) -> GlobalsGraphNodeBase:
 	var trigger_name = "Trigger%s" % [index]
-	for child in get_children():
-		if child is GraphNode and child.title == trigger_name:
-			return child
-	return null
+	var arr: Array = get_tree().get_nodes_in_group("TriggerNode").filter(func(item): return item.title == trigger_name)
+	return null if arr.is_empty() else arr.get(0)
 
-func find_action_by_index(index: int) -> GraphNode:
+func find_action_by_index(index: int) -> GlobalsGraphNodeBase:
 	var action_name = "Action%s" % [index]
-	for child in get_children():
-		if child is GraphNode and child.title == action_name:
-			return child
-	return null
+	var arr: Array = get_tree().get_nodes_in_group("ActionNode").filter(func(item): return item.title == action_name)
+	return null if arr.is_empty() else arr.get(0)
 
-func find_link_by_index(index: int) -> GraphNode:
+func find_link_by_index(index: int) -> GlobalsGraphNodeBase:
 	var link_name = "Link%s" % [index]
-	for child in get_children():
-		if child is GraphNode and child.title == link_name:
-			return child
-	return null
+	var arr: Array = get_tree().get_nodes_in_group("LinkNode").filter(func(item): return item.title == link_name)
+	return null if arr.is_empty() else arr.get(0)
 
-func trigger_from_parsed(data: GlobalsParser.ParsedEntry, pos: Vector2) -> GraphNode:
-	var node: TriggerNode = trigger_scene.instantiate()
+func node_from_parsed(data: GlobalsParser.ParsedEntry, pos: Vector2) -> GlobalsGraphNodeBase:
+	var name_mask: String = data.name.substr(0, 4)
+	var node: GlobalsGraphNodeBase
+	match name_mask:
+		"Link":
+			node = link_scene.instantiate()
+		"Acti":
+			node = action_scene.instantiate()
+		"Trig":
+			node = trigger_scene.instantiate()
+		_:
+			push_error("Don't know which node type is object '%s'" % [data.name])
+			return null
 	add_child(node)
 	node.set_owner(self)
 	node.position_offset = pos
-	node.title = data.name
-	var pval: GlobalsParser.ParsedValue = data.find_param_by_name("TriggerName")
-	if pval == null:
-		push_error("Didn't find param 'TriggerName' on Trigger")
-		return node
-	node.triggerName.text = pval.value
-	pval = data.find_param_by_name("TriggerType")
-	if pval == null:
-		push_error("Didn't find param 'TriggerType' on Trigger")
-		return node
-	node.typeDescription.text = String.num_int64(pval.value)
+	node.link_graph(self)
+	node.from_parsed(data)
 	return node
 
-func action_from_parsed(data: GlobalsParser.ParsedEntry, pos: Vector2) -> GraphNode:
-	var node: ActionNode = action_scene.instantiate()
-	add_child(node)
-	node.set_owner(self)
-	node.position_offset = pos
-	node.title = data.name
-	var pval: GlobalsParser.ParsedValue = data.find_param_by_name("ActionName")
-	if pval == null:
-		push_error("Didn't find param 'ActionName' on Action")
-		return node
-	node.actionName.text = pval.value
-	pval = data.find_param_by_name("ExecuteDelay")
-	if pval == null:
-		push_error("Didn't find param 'ExecuteDelay' on Action")
-		return node
-	node.execDelay.value = pval.value
-	pval = data.find_param_by_name("ExecuteImmediately")
-	if pval == null:
-		push_error("Didn't find param 'ExecuteImmediately' on Action")
-		return node
-	node.execImmediately.set_pressed_no_signal(pval.value == 1)
-	pval = data.find_param_by_name("ActionType")
-	if pval == null:
-		push_error("Didn't find param 'ActionType' on Action")
-		return node
-	node.typeDescription.text = String.num_int64(pval.value)
-	return node
 
-func link_from_parsed(data: GlobalsParser.ParsedEntry, pos: Vector2) -> GraphNode:
-	var node: LinkNode = link_scene.instantiate()
-	add_child(node)
-	node.set_owner(self)
-	node.position_offset = pos
-	node.title = data.name
-	var pval: GlobalsParser.ParsedValue = data.find_param_by_name("LinkRepeats")
-	if pval == null:
-		push_error("Didn't find param 'LinkRepeats' on Link")
-		return node
-	node.linkRepeats.set_pressed_no_signal(pval.value == 1)
-	pval = data.find_param_by_name("LogicType")
-	if pval == null:
-		push_error("Didn't find param 'LogicType' on Link")
-		return node
-	node.logicType.selected = pval.value
-	pval = data.find_param_by_name("LinkState")
-	if pval == null:
-		push_error("Didn't find param 'LinkState' on Link")
-		return node
-	node.linkState.selected = pval.value
-	return node
+func get_node_class_index(type: StringName) -> int:
+	var indices: Array = get_tree().get_nodes_in_group(type).map(func (node): return (node as GlobalsGraphNodeBase).node_class_index)
+	indices.sort()
+	var prev := -1
+	for idx in indices:
+		if idx - prev > 1:
+			if idx == -1:
+				continue
+			return prev + 1
+		prev = idx
+	return prev + 1
+
+
+func link_at_mouse():
+	var pos: Vector2 = get_global_mouse_position()
+	link_spawn_at(scroll_offset + pos)
+
+
+func select_all():
+	get_tree().set_group("LinkNode", "selected", true)
+	get_tree().set_group("ActionNode", "selected", true)
+	get_tree().set_group("TriggerNode", "selected", true)

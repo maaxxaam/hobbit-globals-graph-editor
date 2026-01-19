@@ -57,4 +57,5 @@ item_2/text = "Using a rope"
 item_2/id = 2
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
 [connection signal="popup_hide" from="PopupMenu" to="." method="_on_popup_menu_popup_hide"]

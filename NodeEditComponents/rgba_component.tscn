@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d35k1ov7t4j2h"]
+
+[node name="RgbaComponent" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Color: "
+
+[node name="R" type="SpinBox" parent="."]
+layout_mode = 2
+max_value = 255.0
+rounded = true
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="G" type="SpinBox" parent="."]
+layout_mode = 2
+max_value = 255.0
+rounded = true
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="B" type="SpinBox" parent="."]
+layout_mode = 2
+max_value = 255.0
+rounded = true
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="A" type="SpinBox" parent="."]
+layout_mode = 2
+max_value = 255.0
+rounded = true
+alignment = 1
+custom_arrow_step = 1.0
+
+[node name="ColorBtn" type="ColorPickerButton" parent="."]
+layout_mode = 2
+text = "Pick"

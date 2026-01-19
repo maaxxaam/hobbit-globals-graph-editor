@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnebbevotykbh" path="res://trigger.gd" id="1_r7rtx"]
 
-[node name="GraphNode" type="GraphNode"]
+[node name="Trigger" type="GraphNode" groups=["TriggerNode"]]
 offset_right = 91.0
 offset_bottom = 78.0
 mouse_filter = 1
@@ -35,6 +35,15 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
 script = ExtResource("1_r7rtx")
 
 [node name="TriggerName" type="LineEdit" parent="."]
@@ -60,3 +69,6 @@ size_flags_horizontal = 3
 [node name="ChangeType" type="Button" parent="TriggerType"]
 layout_mode = 2
 text = " Edit "
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+layout_mode = 2

@@ -23,6 +23,12 @@ GlobalsParser="*res://globals_parser.gd"
 
 display_server/driver.linuxbsd="wayland"
 
+[global_group]
+
+LinkNode="All the link nodes in the editor"
+ActionNode="All the Action nodes in the editor"
+TriggerNode="All the triggers in the editor"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

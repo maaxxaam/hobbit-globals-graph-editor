@@ -2,19 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dm2vu78h4ntor" path="res://NodeEditComponents/checkbox_component.gd" id="1_7hmae"]
 
-[node name="CheckboxComponent" type="Control"]
-layout_mode = 3
+[node name="CheckboxComponent" type="CenterContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 script = ExtResource("1_7hmae")
 
 [node name="CheckBox" type="CheckBox" parent="."]
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
+layout_mode = 2
+text = "123456"
 
 [connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]

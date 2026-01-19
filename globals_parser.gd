@@ -19,12 +19,9 @@ class ParsedEntry:
 		var index: int = params.find_custom(func(item): return item.name == param_name)
 		return null if index == -1 else params[index]
 
-	static func from_json(_name: String, list: Dictionary) -> Dictionary[String, Variant]:
+	static func from_json(_name: String, list: Dictionary) -> ParsedEntry:
 		var parse_result := GlobalsParser.parse_var_names(_name, list)
-		var ret: Dictionary[String, Variant] = { "result": ParsedEntry.new(_name, parse_result["result"]) }
-		if parse_result.has("Errors"):
-			ret.set("Errors", parse_result["Errors"])
-		return ret
+		return ParsedEntry.new(_name, parse_result)
 
 	func _to_string():
 		return "'%s' - %s" % [name, params]
@@ -69,7 +66,7 @@ func parse_text(_file: String) -> Dictionary[String, Array]:
 		if row_count_sep == -1:  # no match
 			var err_msg: String = "Parse error (line %s): expected string format '[ Name : 000 ]', got '[ %s ]'" % [line_num, line]
 			push_error(err_msg)
-			return {"Errors": [err_msg], "Abort": []}
+			return {"Abort": []}
 		var new_entry: Dictionary[String, Variant] = {
 			"name": line.substr(0, row_count_sep),
 			"row_count": line.substr(row_count_sep + 3).to_int(),
@@ -130,7 +127,7 @@ func parse_text(_file: String) -> Dictionary[String, Array]:
 							var err_msg: String = "Parse error (line %s): unknown variable type '%s' from attr '%s' on obj '%s'" % [line_num, type_symbol, cur_name, new_entry["name"]]
 							push_error(err_msg)
 							file.close()
-							return {"Errors": [err_msg], "Abort": []}
+							return {"Abort": []}
 					string_offset += 1
 				if len(value) == 1:
 					value = value[0]
@@ -158,14 +155,14 @@ func parse_export(_file: String) -> Dictionary[String, Array]:
 		var err_msg: String = "Integrity check failed: expected %s strings, got %s" % [string_amount, len(strings)]
 		push_error(err_msg)
 		file.close()
-		return {"Errors": [err_msg], "Abort": []}
+		return {"Abort": []}
 	var next_entry: int = file.get_position()
 	while next_entry != 0:
 		if next_entry != file.get_position():
 			var err_msg: String = "Integrity error after parsing entry %s: expected to be at pos 0x%s but got to pos 0x%s" % [len(data), String.num_int64(next_entry, 16), String.num_int64(file.get_position(), 16)]
 			push_error(err_msg)
 			file.close()
-			return {"Errors": [err_msg], "Abort": []}
+			return {"Abort": []}
 		var new_entry: Dictionary[String, Variant] = {
 			"name": strings[file.get_32()],
 			"rows": []
@@ -178,7 +175,7 @@ func parse_export(_file: String) -> Dictionary[String, Array]:
 				var err_msg: String = "Parse error: expected to read %s more rows for entry '%s' but reached EOF" % [new_entry["row_count"] - i, new_entry["name"]]
 				push_error(err_msg)
 				file.close()
-				return {"Errors": [err_msg], "Abort": []}
+				return {"Abort": []}
 			var row_bytes: int = file.get_32()
 			var row_bytes_read: int = 0
 			file.get_32()
@@ -199,14 +196,14 @@ func parse_export(_file: String) -> Dictionary[String, Array]:
 						"f":
 							col_final_data.append(column_data.slice(0, 4).decode_float(0))
 							column_data = column_data.slice(4)
-						["s", "g"]:
+						"s", "g":
 							col_final_data.append(column_data.slice(0, column_data.find(0)).get_string_from_ascii())
 							column_data = column_data.slice(column_data.find(0) + 1)
 						_:
 							var err_msg: String = "Parse error: unknown variable type '%s' from attr '%s' on obj '%s'" % [type_symbol, column_name, new_entry["name"]]
 							push_error(err_msg)
 							file.close()
-							return {"Errors": [err_msg], "Abort": []}
+							return {"Abort": []}
 					name_index -= 1
 				if len(col_final_data) == 1:
 					col_final_data = col_final_data[0]
@@ -215,7 +212,7 @@ func parse_export(_file: String) -> Dictionary[String, Array]:
 				var err_msg: String = "Parse error: expected to read %s bytes for a row of entry '%s' but read %s bytes instead" % [row_bytes, new_entry["name"], row_bytes_read]
 				push_error(err_msg)
 				file.close()
-				return {"Errors": [err_msg], "Abort": []}
+				return {"Abort": []}
 			new_entry["rows"].append(row_data)
 		data.append(new_entry)
 		file.get_64()
@@ -227,11 +224,11 @@ func parse_json(_file: String) -> Dictionary[String, Array]:
 	var json_result = JSON.parse_string(FileAccess.get_file_as_string(_file))
 	if json_result == null:
 		push_error("Not a JSON file!")
-		return {"Errors": ["Not a JSON file!"], "Abort": []}
+		return {"Abort": []}
 	if typeof(json_result) != TYPE_ARRAY:
 		var err_msg: String = "Expected an Array from JSON, got a different type %s" % [typeof(json_result)]
 		push_error(err_msg)
-		return {"Errors": [err_msg], "Abort": []}
+		return {"Abort": []}
 	var json_array: Array = json_result as Array
 	return parse_data(json_array)
 
@@ -272,51 +269,30 @@ func parse_data(json_array: Array) -> Dictionary[String, Array]:
 	if links > 0 and json_array[entry_index + triggers + actions + links].name != ("Link%s" % [links - 1]):
 		push_error("Integrity check failed: expected element %s to be 'Link%s', got %s" % [triggers + actions + links - 1, links - 1, json_array[entry_index + triggers + actions + links].name])
 		return result
-	var errors: Array[String] = []
-	#result["Triggers"] = json_array.slice(entry_index + 1, entry_index + triggers + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
-	var slice: Array = json_array.slice(entry_index + 1, entry_index + triggers + 1, 1, true)
-	for item in slice:
-		var parse_result = ParsedEntry.from_json(item.name, item.rows[0])
-		result["Triggers"].append(parse_result["result"])
-		if parse_result.has("Errors"):
-			errors.append_array(parse_result["Errors"])
-	#result["Actions"] = json_array.slice(entry_index + triggers + 1, entry_index + triggers + actions + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
-	slice = json_array.slice(entry_index + triggers + 1, entry_index + triggers + actions + 1, 1, true)
-	for item in slice:
-		var parse_result = ParsedEntry.from_json(item.name, item.rows[0])
-		result["Actions"].append(parse_result["result"])
-		if parse_result.has("Errors"):
-			errors.append_array(parse_result["Errors"])
-	#result["Links"] = json_array.slice(entry_index + triggers + actions + 1, entry_index + triggers + actions + links + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
-	slice = json_array.slice(entry_index + triggers + actions + 1, entry_index + triggers + actions + links + 1, 1, true)
-	for item in slice:
-		var parse_result = ParsedEntry.from_json(item.name, item.rows[0])
-		result["Links"].append(parse_result["result"])
-		if parse_result.has("Errors"):
-			errors.append_array(parse_result["Errors"])
-	if len(errors) > 0:
-		if result.has("Errors"):
-			result["Errors"].append_array(errors)
-		else:
-			result.set("Errors", errors)
+	result["Triggers"] = json_array.slice(entry_index + 1, entry_index + triggers + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
+	result["Actions"] = json_array.slice(entry_index + triggers + 1, entry_index + triggers + actions + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
+	result["Links"] = json_array.slice(entry_index + triggers + actions + 1, entry_index + triggers + actions + links + 1, 1, true).map(func(item): return ParsedEntry.from_json(item.name, item.rows[0]))
 	return result
 
-func parse_var_names(var_name: String, row: Dictionary) -> Dictionary[String, Array]:
-	var errors: Array[String]
+func get_int_from_string_end(from: String) -> int:
 	var index_length: int = 1
-	while var_name.substr(len(var_name) - index_length).is_valid_int():
+	while from.substr(len(from) - index_length).is_valid_int():
 		index_length += 1
 	var index: int = -1
 	index_length -= 1
 	if index_length > 0:
-		index = var_name.substr(len(var_name) - index_length).to_int()
+		index = from.substr(len(from) - index_length).to_int()
+	return index
+
+func parse_var_names(var_name: String, row: Dictionary) -> Array[ParsedValue]:
+	var index: int = get_int_from_string_end(var_name)
+	var index_length: int = len(String.num_int64(index))
 	var result: Array[ParsedValue] = []
 	for item: String in row.keys():
 		var sep: int = item.find(":")
 		if sep == -1:
 			var err_msg := "Object '%s' has attr '%s' w/o type info. Skipping attribute..." % [var_name, item]
 			push_error(err_msg)
-			errors.append(err_msg)
 			continue
 		var type: String = item.substr(sep + 1)
 		var name_indexed: String = item.substr(0, sep)
@@ -331,12 +307,10 @@ func parse_var_names(var_name: String, row: Dictionary) -> Dictionary[String, Ar
 			elif not possible_index.is_valid_int():
 				var err_msg := "Object '%s' has attr '%s' w/o matching index suffix. Skipping attribute..." % [var_name, name_indexed]
 				push_error(err_msg)
-				errors.append(err_msg)
 				continue
 			elif possible_index.to_int() != index:
 				var err_msg := "Object '%s' has attr '%s' w/o matching index suffix. Skipping attribute..." % [var_name, name_indexed]
 				push_error(err_msg)
-				errors.append(err_msg)
 				continue
 			else:
 				attr_name = name_indexed.substr(0, len(name_indexed) - index_length)
@@ -369,15 +343,16 @@ func parse_var_names(var_name: String, row: Dictionary) -> Dictionary[String, Ar
 		# Edge case: action type 33 has InstanceCount but indices are named RigidInstanceXXX
 		if attr_name == "RigidInstance":
 			attr_name = "Instance"
+		# Edge case: action type 8 has DialogCount but indices are named DialogNameXXX
+		if attr_name == "DialogName":
+			attr_name = "Dialog"
 		# Check for array types like fff or dddd
 		if len(type) > 1 and val_type != TYPE_ARRAY:
 			var err_msg := "Type mismatch for attr '%s' in object '%s': expected array from notation '%s', got type %s. Inserting anyway..." % [attr_name, var_name, type, val_type]
 			push_error(err_msg)
-			errors.append(err_msg)
 		if len(type) == 1 and not simple_type_mapping.has(type):
 			var err_msg := "Unknown type in attr '%s' of object '%s': '%s'. Inserting anyway..." % [attr_name, var_name, type]
 			push_error(err_msg)
-			errors.append(err_msg)
 			result.append(ParsedValue.new(attr_name, type, value))
 			continue
 		if len(type) == 1 and simple_type_mapping[type] != val_type:
@@ -387,13 +362,17 @@ func parse_var_names(var_name: String, row: Dictionary) -> Dictionary[String, Ar
 			else:
 				var err_msg := "Type mismatch for attr '%s' in object '%s': expected type %s, got type %s. Skipping attribute..." % [attr_name, var_name, simple_type_mapping[type], val_type]
 				push_error(err_msg)
-				errors.append(err_msg)
 				continue
 		if array_index == -1:
 			# Handle edge case for type 16 with weird attr names
 			if len(attr_name) == 0 and val_type == TYPE_ARRAY:
 				result.append(ParsedValue.new("NPC", type, value))
 				result.append(ParsedValue.new("State", type, value))
+			elif val_type == TYPE_ARRAY and attr_name == "Spawn":
+				result.append(ParsedValue.new("NPC", type, value))
+				result.append(ParsedValue.new("Location", type, value))
+				result.append(ParsedValue.new("Facing", type, value))
+				result.append(ParsedValue.new("Animation", type, value))
 			else:
 				result.append(ParsedValue.new(attr_name, type, value))
 		else:
@@ -410,8 +389,4 @@ func parse_var_names(var_name: String, row: Dictionary) -> Dictionary[String, Ar
 			if (item.value as Array).has(null):
 				var err_msg := "Attr '%s' of object '%s' is an array %s with null entries! Something probably went wrong..." % [item.name, var_name, item.value]
 				push_error(err_msg)
-				errors.append(err_msg)
-	var ret: Dictionary[String, Array] = { "result": result }
-	if len(errors) > 0:
-		ret.set("Errors", errors)
-	return ret
+	return result
