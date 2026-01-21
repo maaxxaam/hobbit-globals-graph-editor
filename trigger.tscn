@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnebbevotykbh" path="res://trigger.gd" id="1_r7rtx"]
 
-[node name="Trigger" type="GraphNode" groups=["TriggerNode"]]
+[node name="Trigger" type="GraphNode" groups=["GlobalsGraphNodeBase", "TriggerNode"]]
 offset_right = 91.0
 offset_bottom = 78.0
 mouse_filter = 1

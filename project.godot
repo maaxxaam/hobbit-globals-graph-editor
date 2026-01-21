@@ -28,6 +28,7 @@ display_server/driver.linuxbsd="wayland"
 LinkNode="All the link nodes in the editor"
 ActionNode="All the Action nodes in the editor"
 TriggerNode="All the triggers in the editor"
+GlobalsGraphNodeBase=""
 
 [rendering]
 

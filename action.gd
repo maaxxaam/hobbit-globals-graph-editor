@@ -1,13 +1,12 @@
 class_name ActionNode extends GlobalsGraphNodeBase
 
-@onready var actionName: LineEdit = $ActionName
-@onready var typeDescription: Label = $ActionType/TypeDesc
 const component_type_desc_map: Dictionary[int, String] = {
 	0: "Empty action",
 	18: "Display text window",
 	19: "Finish level",
 	22: "Start quest",
 	29: "Finish quest",
+	30: "Start a fade",
 	34: "Remove quest",
 	43: "Material related action",
 	44: "Silently kill Bilbo",
@@ -32,6 +31,11 @@ const component_type_name_map: Dictionary[int, Dictionary] = {
 	29: {
 		"QuestID": "Quest ID: "
 	},
+	30: {
+		"Fadeout": "Fade type: ",
+		"Color": "Fade color: ",
+		"Duration": "Duration: "
+	},
 	34: {
 		"QuestID": "Quest ID: "
 	},
@@ -47,18 +51,26 @@ const component_type_name_map: Dictionary[int, Dictionary] = {
 const component_type_param_map: Dictionary[int, Dictionary] = {
 	-1: {
 		"ExecuteDelay": {
-			"suffix": " sec"
+			"suffix": "sec"
 		}
 	},
 	0: {},
 	18: {
 		"DelayTime": {
-			"suffix": " sec"
+			"suffix": "sec"
 		}
 	},
 	19: {},
 	22: {},
 	29: {},
+	30: {
+		"Fadeout": {
+			"options": ["Fade In", "Fade Out"]
+		},
+		"Duration": {
+			"suffix": "sec"
+		}
+	},
 	34: {},
 	43: {},
 	44: {},
@@ -72,6 +84,10 @@ var component_type_type_map: Dictionary[int, Dictionary] = {
 	22: {
 		"Required": AvailableComponents.Boolean
 	},
+	30: {
+		"Color": AvailableComponents.ArrayColor,
+		"Fadeout": AvailableComponents.Choice
+	},
 	43: {
 		"Enable": AvailableComponents.Boolean
 	}
@@ -81,7 +97,7 @@ var component_type_type_map: Dictionary[int, Dictionary] = {
 func export_before_components() -> Dictionary[String, Variant]:
 	return {
 		"ActionType%s" % [node_class_index]: type_index,
-		"ActionName%s" % [node_class_index]: actionName.text
+		"ActionName%s" % [node_class_index]: node_description.text
 	}
 
 
@@ -120,13 +136,13 @@ func from_parsed(parsed_data: GlobalsParser.ParsedEntry):
 	var type_entry := parsed_data.find_param_by_name("ActionType")
 	if (desc_entry == null) or (type_entry == null):
 		return # TODO: error
-	actionName.text = desc_entry.value
+	node_description.text = desc_entry.value
 	type_index = type_entry.value
 	if not (component_type_name_map.has(type_index) and component_type_desc_map.has(type_index) and component_type_param_map.has(type_index)):
 		push_warning("Unknown action type %d in '%s'" % [type_index, parsed_data.name])
-		typeDescription.text = str(type_index)
+		type_description.text = str(type_index)
 		return # do not try parsing unknown types. There be dragons!
-	typeDescription.text = component_type_desc_map.get(type_index)
+	type_description.text = component_type_desc_map.get(type_index)
 	var params: Array[GlobalsParser.ParsedValue] = parsed_data.params.duplicate(true).filter(func(item): return (item.name != "ActionName") and (item.name != "ActionType"))
 	component_name_map = component_type_name_map.get(-1)
 	component_params_map = component_type_param_map.get(-1)
@@ -143,3 +159,12 @@ func from_parsed(parsed_data: GlobalsParser.ParsedEntry):
 
 func get_component_default(_type: AvailableComponents, _component_name: String):
 	pass
+
+
+func get_node_description() -> String:
+	return node_description.text
+
+
+func _ready():
+	node_description = $ActionName
+	type_description = $ActionType/TypeDesc

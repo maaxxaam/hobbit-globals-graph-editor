@@ -7,16 +7,27 @@ class_name MainWindow extends Node2D
 
 
 func _ready():
+	OS.low_processor_usage_mode = true
 	await get_tree().physics_frame
 	get_tree().root.size_changed.connect(match_size)
 	get_tree().root.files_dropped.connect(_on_window_files_dropped)
 	match_size()
 	show()
 	popup.graph = Graph
+	find_node.graph = Graph
 	popup.new_link_requested.connect(Graph.link_at_mouse)
 	popup.select_all_requested.connect(Graph.select_all)
 	popup.undo_requested.connect(Graph.undo_action)
 	popup.redo_requested.connect(Graph.redo_action)
+	popup.find_requested.connect(find_action)
+
+
+func find_action():
+	if find_node.visible:
+		find_node.find()
+	else:
+		find_node.show()
+		find_node.query_box.edit()
 
 
 func _on_window_files_dropped(files: PackedStringArray):

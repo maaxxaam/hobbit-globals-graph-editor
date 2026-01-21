@@ -171,7 +171,7 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 	# Isolated subgraphs with a single link on the bottom
 	var last_link_idx := len(parsed_data["Links"]) - 1
 	var idx := 0
-	while idx < last_link_idx:
+	while idx <= last_link_idx:
 		var data = parsed_data["Links"][idx] as GlobalsParser.ParsedEntry
 		var orphan: bool = true
 		var items_t: Array = []
@@ -221,6 +221,7 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 	# Remaining isolated subgraphs together
 	idx = 0
 	while idx < last_link_idx:
+		print(last_link_idx)
 		var data = parsed_data["Links"][idx] as GlobalsParser.ParsedEntry
 		var ids: Array[int] = [idx]
 		var items_t: Array = []
@@ -232,7 +233,7 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 		if pval != null:
 			items_a = pval.value.duplicate()
 		prints(items_t, items_a)
-		for i in last_link_idx:
+		for i in last_link_idx + 1:
 			var item = parsed_data["Links"][i]
 			if item.name == parsed_data["Links"][idx].name:
 				continue
@@ -255,6 +256,8 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 						break
 				if skip:
 					break
+			if skip:
+				continue
 			for candidate in link_items_a:
 				for tester in items_a:
 					if candidate == tester:
@@ -266,13 +269,17 @@ func from_parsed_data(parsed_data: Dictionary[String, Array]):
 				if skip:
 					break
 			if skip:
-				break
-		for index in ids:
-			var temp = parsed_data["Links"].get(idx)
-			parsed_data["Links"].set(idx, parsed_data["Links"].get(last_link_idx))
+				continue
+		ids.sort()
+		ids.reverse()
+		print(ids)
+		for index in len(ids):
+			var item := ids[index]
+			var temp = parsed_data["Links"].get(item)
+			parsed_data["Links"].set(item, parsed_data["Links"].get(last_link_idx))
 			parsed_data["Links"].set(last_link_idx, temp)
 			last_link_idx -= 1
-		idx += 1
+		#idx += 1
 
 	for item: GlobalsParser.ParsedEntry in parsed_data["Links"]:
 		var new_node: GraphNode = node_from_parsed(item, Vector2(LINK_X, link_y))

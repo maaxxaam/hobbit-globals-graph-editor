@@ -11,6 +11,7 @@ enum AvailableComponents {
 	ArrayFloat,
 	ArrayStr,
 	ArrayGUID,
+	ArrayColor,
 	Unknown
 }
 
@@ -25,13 +26,14 @@ var components: Array[EditComponent]
 var component_params_map: Dictionary # [String, Dictionary]
 var component_name_map: Dictionary # [String, String]
 var component_type_map: Dictionary[AvailableComponents, PackedScene] = {
-	AvailableComponents.Boolean: preload("res://NodeEditComponents/checkbox_component.tscn"),
-	AvailableComponents.Choice : preload("res://NodeEditComponents/dropdown_component.tscn"),
-	AvailableComponents.Integer: preload("res://NodeEditComponents/int_component.tscn"),
-	AvailableComponents.Float  : preload("res://NodeEditComponents/float_component.tscn"),
-	AvailableComponents.Str    : preload("res://NodeEditComponents/string_component.tscn"),
+	AvailableComponents.Boolean   : preload("res://NodeEditComponents/checkbox_component.tscn"),
+	AvailableComponents.Choice    : preload("res://NodeEditComponents/dropdown_component.tscn"),
+	AvailableComponents.Integer   : preload("res://NodeEditComponents/int_component.tscn"),
+	AvailableComponents.Float     : preload("res://NodeEditComponents/float_component.tscn"),
+	AvailableComponents.Str       : preload("res://NodeEditComponents/string_component.tscn"),
 	# TODO: proper GUID component
-	AvailableComponents.GUID   : preload("res://NodeEditComponents/string_component.tscn")
+	AvailableComponents.GUID      : preload("res://NodeEditComponents/string_component.tscn"),
+	AvailableComponents.ArrayColor: preload("res://NodeEditComponents/rgba_component.tscn")
 }
 
 func export() -> Dictionary[String, Variant]:
@@ -139,3 +141,4 @@ func set_node_title(to: String) -> void:
 @abstract func from_parsed(parsed_data: GlobalsParser.ParsedEntry)
 @abstract func from_empty(type: int)
 @abstract func get_component_default(type: AvailableComponents, component_name: String)
+@abstract func get_node_description() -> String

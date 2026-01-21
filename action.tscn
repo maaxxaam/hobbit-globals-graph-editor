@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b31uw58dxk4t5" path="res://action.gd" id="1_a2i7p"]
 
-[node name="Action" type="GraphNode" groups=["ActionNode"]]
+[node name="Action" type="GraphNode" groups=["ActionNode", "GlobalsGraphNodeBase"]]
 offset_right = 86.0
 offset_bottom = 78.0
 mouse_filter = 1

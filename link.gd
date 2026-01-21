@@ -82,3 +82,7 @@ func from_empty(_type: int):
 
 func get_component_default(type: AvailableComponents, _component_name: String):
 	return _component_default_defaults(type)
+
+
+func get_node_description() -> String:
+	return title
