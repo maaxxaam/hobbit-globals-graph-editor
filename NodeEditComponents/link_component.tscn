@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b8isd6ekw70br"]
+
+[node name="LinkComponent" type="HBoxContainer" unique_id=386470965]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpinBox" type="SpinBox" parent="." unique_id=939197573]
+layout_mode = 2
+rounded = true
+allow_greater = true
+prefix = "Link"
+select_all_on_focus = true

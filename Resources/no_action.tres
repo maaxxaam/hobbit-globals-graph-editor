@@ -5,8 +5,5 @@
 
 [resource]
 script = ExtResource("1_xq0sd")
-descriptive_name = "Dialogs: "
-variable_aliases = Dictionary[String, String]({
-"Dialog": "Dialog name:"
-})
+descriptive_name = "Empty action"
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

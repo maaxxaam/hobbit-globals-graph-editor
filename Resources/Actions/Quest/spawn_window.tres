@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://y5hqs5a571ou"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_6iejc"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_cxe4y"]
+
+[sub_resource type="Resource" id="Resource_fnrxb"]
+script = ExtResource("2_cxe4y")
+data = Dictionary[String, Variant]({
+"suffix": "sec"
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
+[resource]
+script = ExtResource("1_6iejc")
+id = 18
+descriptive_name = "Create text window"
+variable_params = Dictionary[String, ExtResource("2_cxe4y")]({
+"DelayTime": SubResource("Resource_fnrxb")
+})
+type_overrides = Dictionary[String, int]({
+"Scroll": 0
+})
+variable_aliases = Dictionary[String, String]({
+"DelayTime": "Show for:",
+"Scroll": "Is scroll training window?",
+"StringID": "String ID:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

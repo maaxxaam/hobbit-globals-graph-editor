@@ -7,11 +7,21 @@ enum AvailableComponents {
 	Float,
 	Str,
 	GUID,
+	RGBAColor,
+	Link,
+	# Generic Arrays
 	ArrayInteger,
 	ArrayFloat,
 	ArrayStr,
 	ArrayGUID,
-	ArrayColor,
+	# Specific Arrays
+	ArrayCinema, # just guid
+	ArrayDialog, # just guid
+	ArrayNPC, # just guid
+	ArrayNPCSpawn,
+	ArrayNPCState,
+	ArrayRigid, # just guid
+	ArrayRope,
 	Unknown
 }
 
@@ -32,7 +42,8 @@ var component_type_map: Dictionary[AvailableComponents, PackedScene] = {
 	AvailableComponents.Float     : preload("res://NodeEditComponents/float_component.tscn"),
 	AvailableComponents.Str       : preload("res://NodeEditComponents/string_component.tscn"),
 	AvailableComponents.GUID      : preload("res://NodeEditComponents/guid_component.tscn"),
-	AvailableComponents.ArrayColor: preload("res://NodeEditComponents/rgba_component.tscn")
+	AvailableComponents.RGBAColor : preload("res://NodeEditComponents/rgba_component.tscn"),
+	AvailableComponents.Link      : preload("res://NodeEditComponents/link_component.tscn"),
 }
 
 func export() -> Dictionary[String, Variant]:

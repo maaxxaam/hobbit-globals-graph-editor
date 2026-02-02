@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://b1ixvqs7tr0lw"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_yc1a2"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_8vmy0"]
+
+[resource]
+script = ExtResource("1_yc1a2")
+id = 17
+descriptive_name = "Spawn pickups"
+variable_aliases = Dictionary[String, String]({
+"Amount": "Amount:",
+"Object": "Pickup object:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"
