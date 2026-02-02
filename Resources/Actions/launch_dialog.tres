@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://c3bpt1241u4l0"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_3vpup"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_2koqf"]
+
+[resource]
+script = ExtResource("1_3vpup")
+id = 7
+descriptive_name = "Launch dialog"
+type_overrides = Dictionary[String, int]({
+"AtLocation": 0,
+"BilboDialog": 0
+})
+variable_aliases = Dictionary[String, String]({
+"AtLocation": "Is at location?",
+"BilboDialog": "Is Bilbo dialog?",
+"DialogName": "Dialog Name:",
+"Speaker": "Speaker:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

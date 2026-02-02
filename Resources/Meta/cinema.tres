@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://7wcfip0j4mmm"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_nyowr"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_lu4tx"]
+
+[resource]
+script = ExtResource("1_nyowr")
+descriptive_name = "Cinema list"
+variable_aliases = Dictionary[String, String]({
+"Cinema": "Cinematic:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

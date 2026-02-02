@@ -31,8 +31,7 @@ var component_type_map: Dictionary[AvailableComponents, PackedScene] = {
 	AvailableComponents.Integer   : preload("res://NodeEditComponents/int_component.tscn"),
 	AvailableComponents.Float     : preload("res://NodeEditComponents/float_component.tscn"),
 	AvailableComponents.Str       : preload("res://NodeEditComponents/string_component.tscn"),
-	# TODO: proper GUID component
-	AvailableComponents.GUID      : preload("res://NodeEditComponents/string_component.tscn"),
+	AvailableComponents.GUID      : preload("res://NodeEditComponents/guid_component.tscn"),
 	AvailableComponents.ArrayColor: preload("res://NodeEditComponents/rgba_component.tscn")
 }
 

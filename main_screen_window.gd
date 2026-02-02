@@ -1,9 +1,9 @@
-class_name MainWindow extends Node2D
+class_name MainWindow extends Control
 
-@onready var Graph: GlobalsGraph = $Control/GraphEdit
-@onready var popup: PopupRMB = $Control/RMB_Popup
-@onready var find_node: FindNodePanel = $Control/FindNode
-@onready var error_box: ErrorBox = $Control/ErrorBox
+@onready var Graph: GlobalsGraph = $GraphEdit
+@onready var popup: PopupRMB = $RMB_Popup
+@onready var find_node: FindNodePanel = $FindNode
+@onready var error_box: ErrorBox = $ErrorBox
 
 
 func _ready():

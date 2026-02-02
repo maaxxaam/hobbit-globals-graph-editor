@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://oe25h67edsji"]
+
+[sub_resource type="Theme" id="Theme_eoayh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vjj7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ArrayItemComponent" type="PanelContainer" unique_id=578762770]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_eoayh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vjj7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1375044028]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1247984762]
+layout_mode = 2
+text = ">"
+
+[node name="Index" type="Label" parent="HBoxContainer" unique_id=1285307671]
+layout_mode = 2
+text = "99"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=619482506]
+layout_mode = 2
+
+[node name="StructContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=87852014]
+layout_mode = 2

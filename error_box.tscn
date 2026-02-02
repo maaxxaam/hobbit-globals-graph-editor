@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://xlueu8tns7jf"]
+[gd_scene format=3 uid="uid://xlueu8tns7jf"]
 
 [ext_resource type="Script" uid="uid://dpsk2v8pdsrm8" path="res://error_box.gd" id="1_up40b"]
+[ext_resource type="Script" uid="uid://bxc0v4sote5vp" path="res://UI/modal_titlebar.gd" id="2_5yw31"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8s2k"]
 bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
@@ -9,59 +10,61 @@ expand_margin_top = 10.0
 expand_margin_right = 10.0
 expand_margin_bottom = 10.0
 
-[node name="ErrorBox" type="Control"]
+[node name="ErrorBox" type="Control" unique_id=408401021]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_up40b")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=244451557]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -81.5
-offset_right = 141.0
-offset_bottom = 81.5
+offset_left = -201.5
+offset_top = -215.5
+offset_right = 201.5
+offset_bottom = 215.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a8s2k")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1447528502]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/HBoxContainer"]
+[node name="Title" type="Button" parent="PanelContainer/HBoxContainer" unique_id=121859529 node_paths=PackedStringArray("node_to_move")]
 layout_mode = 2
-size_flags_horizontal = 4
+action_mode = 0
 text = "Errors occured!"
+flat = true
+script = ExtResource("2_5yw31")
+node_to_move = NodePath("../../..")
+metadata/_custom_type_script = "uid://bxc0v4sote5vp"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer" unique_id=2040425309]
 layout_mode = 2
 
-[node name="Note" type="Label" parent="PanelContainer/HBoxContainer"]
+[node name="Note" type="Label" parent="PanelContainer/HBoxContainer" unique_id=273329553]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "You might want to report that to a developer*
 *after confirming that this isn't supposed to happen"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/HBoxContainer" unique_id=1728866974]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/HBoxContainer/ScrollContainer"]
+[node name="TextEdit" type="TextEdit" parent="PanelContainer/HBoxContainer/ScrollContainer" unique_id=880534091]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 
-[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=348625441]
 layout_mode = 2
 
-[node name="Close" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+[node name="Close" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow" unique_id=664014826]
 layout_mode = 2
 size_flags_horizontal = 6
 text = " Close "

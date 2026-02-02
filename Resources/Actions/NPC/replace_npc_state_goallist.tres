@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cvuua67d84gtu"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_rb1b3"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_5phf7"]
+
+[resource]
+script = ExtResource("1_rb1b3")
+id = 4
+descriptive_name = "Replace NPC's state & goal list"
+type_overrides = Dictionary[String, int]({
+"OverrideCinematicAnimation": 0
+})
+variable_aliases = Dictionary[String, String]({
+"AIStateName": "AI State Name:",
+"Character": "Character:",
+"GoalListName": "Goal List Name:",
+"OverrideCinematicAnimation": "Override Cinematic Animation?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

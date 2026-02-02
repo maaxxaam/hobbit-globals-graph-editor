@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://6pigmqgtn7qr"]
+
+[node name="ArrayComponent" type="VBoxContainer" unique_id=1281288039]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ArrayHeader" type="HBoxContainer" parent="." unique_id=1480725556]
+layout_mode = 2
+
+[node name="ArrayName" type="Label" parent="ArrayHeader" unique_id=1863988456]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dialogs: "
+
+[node name="AddItem" type="Button" parent="ArrayHeader" unique_id=1555587907]
+layout_mode = 2
+text = " + "
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=902992108]
+layout_mode = 2
+
+[node name="ArrayItems" type="VBoxContainer" parent="." unique_id=1355178418]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=828775658]
+layout_mode = 2

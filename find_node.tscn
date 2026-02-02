@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ble1btn658ycj"]
+[gd_scene format=3 uid="uid://ble1btn658ycj"]
 
 [ext_resource type="Script" uid="uid://csj4gtwh6s0y5" path="res://find_node.gd" id="1_62lvk"]
+[ext_resource type="Script" uid="uid://bxc0v4sote5vp" path="res://UI/modal_titlebar.gd" id="2_dwgvq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7a4el"]
 bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
@@ -9,18 +10,22 @@ expand_margin_top = 10.0
 expand_margin_right = 10.0
 expand_margin_bottom = 10.0
 
-[node name="FindNode" type="Control"]
+[node name="FindNode" type="Control" unique_id=2055048145]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_62lvk")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=223034063]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,51 +40,54 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7a4el")
 
-[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=622825728]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/HBoxContainer"]
+[node name="Title" type="Button" parent="PanelContainer/HBoxContainer" unique_id=1173692934 node_paths=PackedStringArray("node_to_move")]
 layout_mode = 2
+action_mode = 0
 text = "Find node"
-horizontal_alignment = 1
+flat = true
+script = ExtResource("2_dwgvq")
+node_to_move = NodePath("../../..")
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/HBoxContainer" unique_id=1693322011]
 layout_mode = 2
 
-[node name="EditTitle" type="Label" parent="PanelContainer/HBoxContainer"]
+[node name="EditTitle" type="Label" parent="PanelContainer/HBoxContainer" unique_id=1336882432]
 layout_mode = 2
 text = "  Search name:"
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer" unique_id=1026850327]
 layout_mode = 2
 placeholder_text = " Node name or description..."
 keep_editing_on_text_submit = true
 
-[node name="FlagsRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="FlagsRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=990095746]
 layout_mode = 2
 
-[node name="CaseSensitive" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow"]
+[node name="CaseSensitive" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow" unique_id=2121261963]
 layout_mode = 2
 button_pressed = true
 text = "Case sensitive"
 
-[node name="UseRegex" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow"]
+[node name="UseRegex" type="CheckBox" parent="PanelContainer/HBoxContainer/FlagsRow" unique_id=1714480837]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "Use regex"
 
-[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer"]
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=398902097]
 layout_mode = 2
 
-[node name="FindNext" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+[node name="FindNext" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow" unique_id=56595389]
 layout_mode = 2
 text = " Find next "
 
-[node name="FindClose" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+[node name="FindClose" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow" unique_id=1715761750]
 layout_mode = 2
 text = " Find and close "
 
-[node name="Close" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow"]
+[node name="Close" type="Button" parent="PanelContainer/HBoxContainer/ButtonRow" unique_id=322831334]
 layout_mode = 2
 text = " Close "
 

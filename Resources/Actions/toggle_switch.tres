@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://t2oxh8cjv2m8"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_8tel6"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_bx07u"]
+
+[sub_resource type="Resource" id="Resource_tkwcd"]
+script = ExtResource("2_bx07u")
+data = Dictionary[String, Variant]({
+"options": ["Off", "On"]
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
+[resource]
+script = ExtResource("1_8tel6")
+id = 1
+descriptive_name = "Toggle switch"
+variable_params = Dictionary[String, ExtResource("2_bx07u")]({
+"SwitchOn": SubResource("Resource_tkwcd")
+})
+type_overrides = Dictionary[String, int]({
+"SwitchOn": 1,
+"Toggle": 0
+})
+variable_aliases = Dictionary[String, String]({
+"SwitchOn": "Switch to state:",
+"Toggle": "Toggle switch?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"
