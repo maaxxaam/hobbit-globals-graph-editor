@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://dhnah0f2iu0jc"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_v2snl"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_a15mt"]
+
+[resource]
+script = ExtResource("1_v2snl")
+id = 21
+descriptive_name = "Replace NPC's cinematic"
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

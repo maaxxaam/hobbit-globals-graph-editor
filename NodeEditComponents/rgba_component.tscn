@@ -1,47 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://d35k1ov7t4j2h"]
+[gd_scene format=3 uid="uid://d35k1ov7t4j2h"]
 
 [ext_resource type="Script" uid="uid://dic5k2ou2hgla" path="res://NodeEditComponents/rgba_component.gd" id="1_d3jsq"]
 
-[node name="RgbaComponent" type="HBoxContainer"]
+[node name="RgbaComponent" type="HBoxContainer" unique_id=1443413303]
 script = ExtResource("1_d3jsq")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2062983773]
 layout_mode = 2
 text = "Color: "
 
-[node name="R" type="SpinBox" parent="."]
+[node name="R" type="SpinBox" parent="." unique_id=344655141]
 layout_mode = 2
 max_value = 255.0
 rounded = true
 alignment = 1
 custom_arrow_step = 1.0
 
-[node name="G" type="SpinBox" parent="."]
+[node name="G" type="SpinBox" parent="." unique_id=1745939012]
 layout_mode = 2
 max_value = 255.0
 rounded = true
 alignment = 1
 custom_arrow_step = 1.0
 
-[node name="B" type="SpinBox" parent="."]
+[node name="B" type="SpinBox" parent="." unique_id=812683569]
 layout_mode = 2
 max_value = 255.0
 rounded = true
 alignment = 1
 custom_arrow_step = 1.0
 
-[node name="A" type="SpinBox" parent="."]
+[node name="A" type="SpinBox" parent="." unique_id=1507837519]
 layout_mode = 2
 max_value = 255.0
 rounded = true
 alignment = 1
 custom_arrow_step = 1.0
 
-[node name="ColorBtn" type="ColorPickerButton" parent="."]
+[node name="ColorBtn" type="ColorPickerButton" parent="." unique_id=2006719124]
 layout_mode = 2
 text = "Pick"
 
-[node name="DebounceTimer" type="Timer" parent="."]
+[node name="DebounceTimer" type="Timer" parent="." unique_id=559786107]
 
 [connection signal="color_changed" from="ColorBtn" to="." method="_on_color_btn_color_changed"]
 [connection signal="timeout" from="DebounceTimer" to="." method="_on_debounce_timer_timeout"]

@@ -85,7 +85,7 @@ var component_type_type_map: Dictionary[int, Dictionary] = {
 		"Required": AvailableComponents.Boolean
 	},
 	30: {
-		"Color": AvailableComponents.ArrayColor,
+		"Color": AvailableComponents.RGBAColor,
 		"Fadeout": AvailableComponents.Choice
 	},
 	43: {
