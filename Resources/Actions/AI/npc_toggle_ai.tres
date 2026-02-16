@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://bsrsgmh3gu7cm"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_wtgsj"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_15y4a"]
+
+[resource]
+script = ExtResource("1_wtgsj")
+id = 50
+descriptive_name = "Toggle NPC's AI"
+type_overrides = Dictionary[String, int]({
+"DoRunAI": 0,
+"NPC": 5
+})
+variable_aliases = Dictionary[String, String]({
+"DoRunAI": "Enable AI?",
+"NPC": "NPC:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

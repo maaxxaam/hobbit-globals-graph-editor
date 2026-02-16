@@ -18,7 +18,9 @@ variable_params = Dictionary[String, ExtResource("2_glhu6")]({
 "Add": SubResource("Resource_cqkmv")
 })
 type_overrides = Dictionary[String, int]({
-"Add": 1
+"Add": 1,
+"Amount": 2,
+"Source": 5
 })
 variable_aliases = Dictionary[String, String]({
 "Add": "Add or remove?",

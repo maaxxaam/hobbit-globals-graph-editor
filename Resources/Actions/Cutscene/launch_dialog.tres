@@ -9,7 +9,9 @@ id = 7
 descriptive_name = "Launch dialog"
 type_overrides = Dictionary[String, int]({
 "AtLocation": 0,
-"BilboDialog": 0
+"BilboDialog": 0,
+"DialogName": 4,
+"Speaker": 5
 })
 variable_aliases = Dictionary[String, String]({
 "AtLocation": "Is at location?",

@@ -8,6 +8,7 @@ script = ExtResource("1_1hh13")
 id = 22
 descriptive_name = "Start quest"
 type_overrides = Dictionary[String, int]({
+"QuestID": 4,
 "Required": 0
 })
 variable_aliases = Dictionary[String, String]({

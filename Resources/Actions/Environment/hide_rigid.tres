@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://dcto7wsfpsy6x"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_gs407"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_f1q6j"]
+
+[resource]
+script = ExtResource("1_gs407")
+id = 49
+descriptive_name = "Show or Hide RigidInstance"
+type_overrides = Dictionary[String, int]({
+"Hidden": 0,
+"RigidInstance": 5
+})
+variable_aliases = Dictionary[String, String]({
+"Hidden": "Should be hidden?",
+"RigidInstance": "RigidInstance:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

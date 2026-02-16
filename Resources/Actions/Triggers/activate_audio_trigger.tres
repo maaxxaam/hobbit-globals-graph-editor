@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cx38y6lh6swol"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_c520h"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_m2dja"]
+
+[resource]
+script = ExtResource("1_c520h")
+id = 45
+descriptive_name = "Activate audio trigger"
+type_overrides = Dictionary[String, int]({
+"AmbientAudioTrigger": 5
+})
+variable_aliases = Dictionary[String, String]({
+"AmbientAudioTrigger": "Audio trigger:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

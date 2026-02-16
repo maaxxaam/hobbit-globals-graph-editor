@@ -7,7 +7,12 @@
 script = ExtResource("1_fwnot")
 id = 25
 descriptive_name = "Set NPC's DoStateController"
+type_overrides = Dictionary[String, int]({
+"DoStateController": 0,
+"NPC": 5
+})
 variable_aliases = Dictionary[String, String]({
+"DoStateController": "Enable State Controller?",
 "NPC": "NPC:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

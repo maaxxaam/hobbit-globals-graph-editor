@@ -27,6 +27,7 @@ variable_params = Dictionary[String, ExtResource("2_0aw7q")]({
 })
 type_overrides = Dictionary[String, int]({
 "Color": 6,
+"Duration": 3,
 "Fadeout": 1
 })
 variable_aliases = Dictionary[String, String]({

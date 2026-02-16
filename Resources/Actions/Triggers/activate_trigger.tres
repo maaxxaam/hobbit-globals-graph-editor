@@ -7,6 +7,9 @@
 script = ExtResource("1_u8djk")
 id = 14
 descriptive_name = "Activate trigger "
+type_overrides = Dictionary[String, int]({
+"Trigger": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Trigger": "Trigger:"
 })

@@ -7,6 +7,10 @@
 script = ExtResource("1_yc1a2")
 id = 17
 descriptive_name = "Spawn pickups"
+type_overrides = Dictionary[String, int]({
+"Amount": 2,
+"Object": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Amount": "Amount:",
 "Object": "Pickup object:"

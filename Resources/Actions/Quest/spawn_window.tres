@@ -18,7 +18,9 @@ variable_params = Dictionary[String, ExtResource("2_cxe4y")]({
 "DelayTime": SubResource("Resource_fnrxb")
 })
 type_overrides = Dictionary[String, int]({
-"Scroll": 0
+"DelayTime": 3,
+"Scroll": 0,
+"StringID": 4
 })
 variable_aliases = Dictionary[String, String]({
 "DelayTime": "Show for:",

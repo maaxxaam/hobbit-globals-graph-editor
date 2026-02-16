@@ -6,9 +6,10 @@
 [resource]
 script = ExtResource("1_aa05v")
 id = 28
-descriptive_name = "Set NPC's DoStateController"
+descriptive_name = "Show or hide NPCs"
 type_overrides = Dictionary[String, int]({
-"DoRender": 0
+"DoRender": 0,
+"NPCs": 14
 })
 variable_aliases = Dictionary[String, String]({
 "DoRender": "Visible?"

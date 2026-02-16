@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://crf3qkyc7ny4t"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_1agwq"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_oid1c"]
+
+[resource]
+script = ExtResource("1_1agwq")
+id = 37
+descriptive_name = "Change invulnerability state"
+type_overrides = Dictionary[String, int]({
+"InvulnGuid": 5,
+"InvulnOn": 0
+})
+variable_aliases = Dictionary[String, String]({
+"InvulnGuid": "Object:",
+"InvulnOn": "Is invulnerable?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

@@ -7,6 +7,11 @@
 script = ExtResource("1_taxyi")
 id = 15
 descriptive_name = "Teleport and rotate object"
+type_overrides = Dictionary[String, int]({
+"Facing": 5,
+"Object": 5,
+"Volume": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Facing": "Rotate towards:",
 "Object": "Object:",

@@ -7,4 +7,7 @@
 script = ExtResource("1_1clvk")
 id = 20
 descriptive_name = "Launch a cinematic"
+type_overrides = Dictionary[String, int]({
+"Cinemas": 12
+})
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

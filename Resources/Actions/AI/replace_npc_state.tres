@@ -7,6 +7,10 @@
 script = ExtResource("1_ekkga")
 id = 13
 descriptive_name = "Replace NPC's state"
+type_overrides = Dictionary[String, int]({
+"NPC": 5,
+"State": 4
+})
 variable_aliases = Dictionary[String, String]({
 "NPC": "Character:",
 "State": "State:"

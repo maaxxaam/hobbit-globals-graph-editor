@@ -18,6 +18,7 @@ variable_params = Dictionary[String, ExtResource("2_qvyww")]({
 "LinkState": SubResource("Resource_nhlx8")
 })
 type_overrides = Dictionary[String, int]({
+"Dialog": 4,
 "Link": 7,
 "LinkState": 1
 })

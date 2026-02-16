@@ -20,7 +20,8 @@ variable_params = Dictionary[String, ExtResource("2_eflf2")]({
 type_overrides = Dictionary[String, int]({
 "AtLocation": 0,
 "BilboDialog": 0,
-"DialogSelectionMethod": 1
+"DialogSelectionMethod": 1,
+"Speaker": 5
 })
 variable_aliases = Dictionary[String, String]({
 "AtLocation": "Is at location?",

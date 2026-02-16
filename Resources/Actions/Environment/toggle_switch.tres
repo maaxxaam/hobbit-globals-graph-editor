@@ -18,10 +18,12 @@ variable_params = Dictionary[String, ExtResource("2_bx07u")]({
 "SwitchOn": SubResource("Resource_tkwcd")
 })
 type_overrides = Dictionary[String, int]({
+"SwitchGuid": 5,
 "SwitchOn": 1,
 "Toggle": 0
 })
 variable_aliases = Dictionary[String, String]({
+"SwitchGuid": "Switch:",
 "SwitchOn": "Switch to state:",
 "Toggle": "Toggle switch?"
 })

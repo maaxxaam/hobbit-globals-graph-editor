@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://bdcfe23g12hal"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_3j85h"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_oyos4"]
+
+[resource]
+script = ExtResource("1_3j85h")
+id = 36
+descriptive_name = "Change object's collision"
+type_overrides = Dictionary[String, int]({
+"BilboCollides": 0,
+"Collides": 0,
+"NPCCollides": 0,
+"Object": 5
+})
+variable_aliases = Dictionary[String, String]({
+"BilboCollides": "Should Bilbo collide?",
+"Collides": "Enable collision?",
+"NPCCollides": "Should NPCs collide?",
+"Object": "Object:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

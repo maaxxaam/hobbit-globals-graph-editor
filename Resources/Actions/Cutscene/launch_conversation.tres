@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://b0c6qboq0pvs"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_8ygro"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_apl16"]
+
+[resource]
+script = ExtResource("1_8ygro")
+id = 3
+descriptive_name = "Set next conversation"
+type_overrides = Dictionary[String, int]({
+"CharacterGuid": 5,
+"ConversationName": 4
+})
+variable_aliases = Dictionary[String, String]({
+"CharacterGuid": "Character:",
+"ConversationName": "Conversation name:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

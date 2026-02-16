@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://bwjgyof8s1ga"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_j3tnr"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_bwbk1"]
+
+[resource]
+script = ExtResource("1_j3tnr")
+id = 44
+descriptive_name = "Kill Bilbo"
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

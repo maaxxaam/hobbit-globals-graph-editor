@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cdmrjyinhbmnd"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_6ktk3"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_w5cxe"]
+
+[resource]
+script = ExtResource("1_6ktk3")
+id = 27
+descriptive_name = "Toggle NPC's collision"
+type_overrides = Dictionary[String, int]({
+"DoCollision": 0
+})
+variable_aliases = Dictionary[String, String]({
+"DoCollision": "Enable collision?",
+"NPC": "NPC:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

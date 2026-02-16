@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cnux4nvnvb1uu"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_5vavf"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_m5f2j"]
+
+[resource]
+script = ExtResource("1_5vavf")
+id = 41
+descriptive_name = "Set NPC's Root position"
+type_overrides = Dictionary[String, int]({
+"DoRootToPosition": 0,
+"NPC": 5,
+"ResetRootPosition": 0
+})
+variable_aliases = Dictionary[String, String]({
+"DoRootToPosition": "Change Root to this Position?",
+"NPC": "NPC:",
+"ResetRootPosition": "Reset Root Position?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

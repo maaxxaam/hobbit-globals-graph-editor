@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://c382tyclcib8w"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_1v2oi"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_0ar1h"]
+
+[resource]
+script = ExtResource("1_1v2oi")
+id = 43
+descriptive_name = "Toggle material animation"
+type_overrides = Dictionary[String, int]({
+"Enable": 0,
+"MaterialName": 4
+})
+variable_aliases = Dictionary[String, String]({
+"Enable": "Enable animation?",
+"MaterialName": "Material name:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

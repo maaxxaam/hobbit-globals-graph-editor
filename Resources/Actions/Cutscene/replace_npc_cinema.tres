@@ -7,4 +7,13 @@
 script = ExtResource("1_v2snl")
 id = 21
 descriptive_name = "Replace NPC's cinematic"
+type_overrides = Dictionary[String, int]({
+"Cinemas": 12,
+"NPCGuid": 5,
+"SelectionMethod": 1
+})
+variable_aliases = Dictionary[String, String]({
+"NPCGuid": "NPC:",
+"SelectionMethod": "Selection method:"
+})
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

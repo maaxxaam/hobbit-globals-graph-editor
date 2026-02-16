@@ -7,6 +7,9 @@
 script = ExtResource("1_831hq")
 id = 10
 descriptive_name = "Activate load layer"
+type_overrides = Dictionary[String, int]({
+"LoadLayer": 5
+})
 variable_aliases = Dictionary[String, String]({
 "LoadLayer": "Load layer:"
 })

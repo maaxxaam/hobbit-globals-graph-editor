@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://d0isetitp0i3i"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_78f48"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_kar87"]
+
+[resource]
+script = ExtResource("1_78f48")
+id = 48
+descriptive_name = "Alter dream ripple shader (UNUSED)"
+type_overrides = Dictionary[String, int]({
+"Amp": 3,
+"Time": 3
+})
+variable_aliases = Dictionary[String, String]({
+"Amp": "Amplitude:",
+"Time": "Time:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"
