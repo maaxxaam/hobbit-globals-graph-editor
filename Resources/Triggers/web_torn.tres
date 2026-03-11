@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://drmsnjt0483vp"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_80yjy"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_7ik6t"]
+
+[resource]
+script = ExtResource("1_80yjy")
+id = 12
+descriptive_name = "When web is torn"
+variable_aliases = Dictionary[String, String]({
+"Web": "Web:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

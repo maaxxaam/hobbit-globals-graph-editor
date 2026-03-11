@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://ifv174swpnud"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_tliih"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_ifvx0"]
+
+[resource]
+script = ExtResource("1_tliih")
+id = 11
+descriptive_name = "On NPC's death"
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

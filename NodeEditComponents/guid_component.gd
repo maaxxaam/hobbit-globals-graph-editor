@@ -4,8 +4,8 @@ const DEBOUNCE_DURATION = 0.2
 const ALLOWED_CHARS = '0123456789abcdefABCDEF'
 @onready var debounce: Timer = $DebounceTimer
 @onready var name_label: Label = $Label
-@onready var text_part_1: LineEdit = $GUIDEdit/HBoxContainer/LineEdit
-@onready var text_part_2: LineEdit = $GUIDEdit/HBoxContainer/LineEdit2
+@onready var text_part_1: TextEdit = $GUIDEdit/HBoxContainer/LineEdit
+@onready var text_part_2: TextEdit = $GUIDEdit/HBoxContainer/LineEdit2
 var debounced_value: String
 var default_params: Dictionary
 var caret_last := 0
@@ -15,6 +15,8 @@ var selection  := 0
 func _ready():
 	variable_default = "00000000_00000000"
 	variable_value = variable_default
+	text_part_1.caret_multiple = false
+	text_part_2.caret_multiple = false
 
 
 func set_value(value: Variant):

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://jg8c1vdb575i"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_i6o0i"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_ut32w"]
+
+[resource]
+script = ExtResource("1_i6o0i")
+id = 15
+descriptive_name = "On NPC's animation"
+variable_aliases = Dictionary[String, String]({
+"AnimationName": "Animation name:",
+"Character": "NPC:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

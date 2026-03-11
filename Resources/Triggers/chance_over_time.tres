@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://becu78tlo27sj"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_pxlu6"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_j1ssr"]
+
+[sub_resource type="Resource" id="Resource_pxlu6"]
+script = ExtResource("2_j1ssr")
+data = Dictionary[String, Variant]({
+"suffix": "sec"
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
+[sub_resource type="Resource" id="Resource_j1ssr"]
+script = ExtResource("2_j1ssr")
+data = Dictionary[String, Variant]({
+"max_value": 100,
+"suffix": "%",
+"unbounded_down": false,
+"unbounded_up": false
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
+[resource]
+script = ExtResource("1_pxlu6")
+id = 5
+descriptive_name = "Periodically with chance"
+variable_params = Dictionary[String, ExtResource("2_j1ssr")]({
+"CheckTime": SubResource("Resource_pxlu6"),
+"RandomPercent": SubResource("Resource_j1ssr")
+})
+variable_aliases = Dictionary[String, String]({
+"CheckTime": "Time between checks:",
+"RandomPercent": "Chance to trigger:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

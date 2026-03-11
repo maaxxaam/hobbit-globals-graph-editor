@@ -28,22 +28,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_35td8")
 [node name="HBoxContainer" type="HBoxContainer" parent="GUIDEdit" unique_id=980851989]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="GUIDEdit/HBoxContainer" unique_id=1031904607]
+[node name="LineEdit" type="TextEdit" parent="GUIDEdit/HBoxContainer" unique_id=1925892120]
 custom_minimum_size = Vector2(105, 32)
 layout_mode = 2
 focus_neighbor_right = NodePath("../LineEdit2")
 focus_next = NodePath("../LineEdit2")
 text = "00000000"
-alignment = 1
-max_length = 8
 emoji_menu_enabled = false
-flat = true
+autowrap_mode = 1
+scroll_fit_content_height = true
 
 [node name="Label" type="Label" parent="GUIDEdit/HBoxContainer" unique_id=1139685673]
 layout_mode = 2
 text = "_"
 
-[node name="LineEdit2" type="LineEdit" parent="GUIDEdit/HBoxContainer" unique_id=582430822]
+[node name="LineEdit2" type="TextEdit" parent="GUIDEdit/HBoxContainer" unique_id=193925813]
 custom_minimum_size = Vector2(105, 32)
 layout_mode = 2
 focus_neighbor_left = NodePath("../LineEdit")
@@ -51,10 +50,7 @@ focus_neighbor_right = NodePath("../../../Button")
 focus_next = NodePath("../../../Button")
 focus_previous = NodePath("../LineEdit")
 text = "00000000"
-alignment = 1
-max_length = 8
 emoji_menu_enabled = false
-flat = true
 
 [node name="DebounceTimer" type="Timer" parent="." unique_id=2135443776]
 
@@ -64,11 +60,7 @@ focus_neighbor_left = NodePath("../GUIDEdit/HBoxContainer/LineEdit2")
 focus_previous = NodePath("../GUIDEdit/HBoxContainer/LineEdit2")
 text = " ⬇ "
 
-[connection signal="editing_toggled" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_editing_toggled"]
 [connection signal="gui_input" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_gui_input"]
-[connection signal="text_change_rejected" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_change_rejected"]
 [connection signal="text_changed" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="editing_toggled" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_editing_toggled"]
 [connection signal="gui_input" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_gui_input"]
-[connection signal="text_change_rejected" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_text_change_rejected"]
 [connection signal="text_changed" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_text_changed"]
