@@ -5,7 +5,13 @@
 
 [resource]
 script = ExtResource("1_vf7jb")
-descriptive_name = "NPC state list"
+id = 5
+descriptive_name = "NPC State list"
+type_overrides = Dictionary[String, int]({
+"Count": 8,
+"NPC": 5,
+"State": 2
+})
 variable_aliases = Dictionary[String, String]({
 "NPC": "NPC:",
 "State": "State:"

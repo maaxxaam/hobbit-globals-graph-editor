@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://db7xdp5nsu8jm"]
 
-[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_l1mis"]
-[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_se2h8"]
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_1tohl"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_gs5kp"]
 
 [resource]
-script = ExtResource("1_l1mis")
+script = ExtResource("1_1tohl")
 id = 8
 descriptive_name = "NPC does an action"
 variable_aliases = Dictionary[String, String]({

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://evn4umevemj4"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_lv0b7"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_ilwii"]
+
+[resource]
+script = ExtResource("1_lv0b7")
+id = 7
+descriptive_name = "NPC list"
+type_overrides = Dictionary[String, int]({
+"NPC": 5,
+"NPCCount": 8
+})
+variable_aliases = Dictionary[String, String]({
+"NPC": "NPC:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

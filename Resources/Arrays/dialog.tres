@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_5ccrp")
+id = 1
 descriptive_name = "Dialog list"
 variable_aliases = Dictionary[String, String]({
 "Dialog": "Dialog name:"

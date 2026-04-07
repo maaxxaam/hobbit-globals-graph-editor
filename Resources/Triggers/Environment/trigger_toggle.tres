@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://bvrxqd1tmyamm"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_vojf6"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_ky4ck"]
+
+[resource]
+script = ExtResource("1_vojf6")
+id = 18
+descriptive_name = "World trigger toggled"
+type_overrides = Dictionary[String, int]({
+"TriggerToggle": 0
+})
+variable_aliases = Dictionary[String, String]({
+"Trigger": "Trigger:",
+"TriggerToggle": "Trigger toggled?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

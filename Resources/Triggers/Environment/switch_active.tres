@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://b4wek15ajgmn3"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_nucm0"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_nlk2n"]
+
+[resource]
+script = ExtResource("1_nucm0")
+id = 14
+descriptive_name = "Switch in state"
+type_overrides = Dictionary[String, int]({
+"SwitchValue": 0
+})
+variable_aliases = Dictionary[String, String]({
+"Switch": "Switch:",
+"SwitchValue": "Is active?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

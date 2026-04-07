@@ -3,10 +3,24 @@
 [ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_cl4bu"]
 [ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_nevt4"]
 
+[sub_resource type="Resource" id="Resource_88n86"]
+script = ExtResource("2_nevt4")
+data = Dictionary[String, Variant]({
+"array_id": 7,
+"array_name": "npcs"
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
 [resource]
 script = ExtResource("1_cl4bu")
 id = 7
 descriptive_name = "On NPC state transition"
+variable_params = Dictionary[String, ExtResource("2_nevt4")]({
+"NPCCount": SubResource("Resource_88n86")
+})
+type_overrides = Dictionary[String, int]({
+"NPCCount": 8
+})
 variable_aliases = Dictionary[String, String]({
 "EnterState": "New state:",
 "ExitState": "Old state:"

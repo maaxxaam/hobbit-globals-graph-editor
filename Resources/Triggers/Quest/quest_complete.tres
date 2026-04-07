@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://ched5oqne4w41"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_vfvdd"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_clke1"]
+
+[resource]
+script = ExtResource("1_vfvdd")
+id = 24
+descriptive_name = "Quest completed"
+variable_aliases = Dictionary[String, String]({
+"QuestName": "Quest name:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

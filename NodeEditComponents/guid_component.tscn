@@ -13,6 +13,15 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35td8"]
+content_margin_top = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g7uor"]
+content_margin_top = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_arxju"]
+content_margin_top = 5.0
+
 [node name="GuidComponent" type="HBoxContainer" unique_id=2077342926]
 localize_numeral_system = false
 script = ExtResource("1_35td8")
@@ -26,41 +35,26 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_35td8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUIDEdit" unique_id=980851989]
+custom_minimum_size = Vector2(225, 32)
 layout_mode = 2
+alignment = 1
 
-[node name="LineEdit" type="TextEdit" parent="GUIDEdit/HBoxContainer" unique_id=1925892120]
-custom_minimum_size = Vector2(105, 32)
+[node name="LineEdit" type="LineEdit" parent="GUIDEdit/HBoxContainer" unique_id=1940617626]
 layout_mode = 2
-focus_neighbor_right = NodePath("../LineEdit2")
-focus_next = NodePath("../LineEdit2")
-text = "00000000"
-emoji_menu_enabled = false
-autowrap_mode = 1
-scroll_fit_content_height = true
-
-[node name="Label" type="Label" parent="GUIDEdit/HBoxContainer" unique_id=1139685673]
-layout_mode = 2
-text = "_"
-
-[node name="LineEdit2" type="TextEdit" parent="GUIDEdit/HBoxContainer" unique_id=193925813]
-custom_minimum_size = Vector2(105, 32)
-layout_mode = 2
-focus_neighbor_left = NodePath("../LineEdit")
-focus_neighbor_right = NodePath("../../../Button")
-focus_next = NodePath("../../../Button")
-focus_previous = NodePath("../LineEdit")
-text = "00000000"
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_35td8")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_g7uor")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_arxju")
+text = "00000000_00000000"
+alignment = 1
+max_length = 17
 emoji_menu_enabled = false
 
 [node name="DebounceTimer" type="Timer" parent="." unique_id=2135443776]
 
 [node name="Button" type="Button" parent="." unique_id=736862035]
 layout_mode = 2
-focus_neighbor_left = NodePath("../GUIDEdit/HBoxContainer/LineEdit2")
-focus_previous = NodePath("../GUIDEdit/HBoxContainer/LineEdit2")
 text = " ⬇ "
 
-[connection signal="gui_input" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="text_change_rejected" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_change_rejected"]
 [connection signal="text_changed" from="GUIDEdit/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
-[connection signal="gui_input" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_gui_input"]
-[connection signal="text_changed" from="GUIDEdit/HBoxContainer/LineEdit2" to="." method="_on_line_edit_2_text_changed"]

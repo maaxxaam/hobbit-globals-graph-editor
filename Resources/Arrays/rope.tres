@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cvxt6dm3khnhv"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_yoxc3"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_5ra1x"]
+
+[resource]
+script = ExtResource("1_yoxc3")
+id = 4
+descriptive_name = "Rope list"
+type_overrides = Dictionary[String, int]({
+"RopeCount": 8,
+"RopeGuid": 5,
+"RopeLength": 3
+})
+variable_aliases = Dictionary[String, String]({
+"RopeGuid": "Rope/Vine:",
+"RopeLength": "Length:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

@@ -5,8 +5,12 @@
 
 [resource]
 script = ExtResource("1_lmxk6")
+id = 3
 descriptive_name = "Rigid Instance list"
+type_overrides = Dictionary[String, int]({
+"RigidInstance": 5
+})
 variable_aliases = Dictionary[String, String]({
-"Rigid": "RigidInstance:"
+"RigidInstance": "RigidInstance:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

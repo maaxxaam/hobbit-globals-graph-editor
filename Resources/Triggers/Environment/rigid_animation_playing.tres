@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://b1mvaspjdqm1"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_ljn77"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_v73rv"]
+
+[resource]
+script = ExtResource("1_ljn77")
+id = 34
+descriptive_name = "RigidInstance animation is playing"
+variable_aliases = Dictionary[String, String]({
+"Animation": "Animation index:",
+"RigidInstance": "RigidInstance:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

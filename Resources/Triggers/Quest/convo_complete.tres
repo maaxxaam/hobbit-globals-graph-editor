@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://b76bsrrhj2eth"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_w3juu"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_84b1e"]
+
+[resource]
+script = ExtResource("1_w3juu")
+id = 2
+descriptive_name = "Conversation completed"
+variable_aliases = Dictionary[String, String]({
+"ConversationName": "Conversation index:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

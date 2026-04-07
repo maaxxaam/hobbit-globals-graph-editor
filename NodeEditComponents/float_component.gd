@@ -3,8 +3,8 @@ class_name FloatComponent extends EditComponent
 const DEBOUNCE_DURATION = 0.2
 @onready var debounce: Timer = $DebounceTimer
 @onready var name_label: Label = $Label
+@onready var numberbox: SpinBox = $SpinBox
 var debounced_value: float = 0.0
-var numberbox: SpinBox
 var default_params: Dictionary[String, Variant] = {
 	"min_value": 0,
 	"max_value": 10000,
@@ -28,22 +28,25 @@ func set_value(value: Variant):
 	numberbox.set_value_no_signal(value)
 
 
-func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, params: Dictionary = default_params):
+func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, params: VarParameters = VarParameters.new()):
+	if name_label == null:
+		debounce = $DebounceTimer
+		name_label = $Label
+		numberbox = $SpinBox
 	variable_display_name = display_name
-	numberbox = $SpinBox
 	graph_node = node
 	variable_name = var_name
 	variable_order = graph_node.component_count
 	name_label.text = display_name + " "
-	if params != null:
-		numberbox.min_value = params.get("min_value", default_params["min_value"])
-		numberbox.max_value = params.get("max_value", default_params["max_value"])
-		numberbox.step = params.get("step", default_params["step"])
-		numberbox.custom_arrow_step = params.get("step", default_params["step"])
-		numberbox.allow_greater = params.get("unbounded_up", default_params["unbounded_up"])
-		numberbox.allow_lesser = params.get("unbounded_down", false)
-		numberbox.prefix = params.get("prefix", "")
-		numberbox.suffix = params.get("suffix", "")
+
+	numberbox.min_value = params.data.get("min_value", default_params["min_value"])
+	numberbox.max_value = params.data.get("max_value", default_params["max_value"])
+	numberbox.step = params.data.get("step", default_params["step"])
+	numberbox.custom_arrow_step = params.data.get("step", default_params["step"])
+	numberbox.allow_greater = params.data.get("unbounded_up", default_params["unbounded_up"])
+	numberbox.allow_lesser = params.data.get("unbounded_down", false)
+	numberbox.prefix = params.data.get("prefix", "")
+	numberbox.suffix = params.data.get("suffix", "")
 	set_value(value)
 
 

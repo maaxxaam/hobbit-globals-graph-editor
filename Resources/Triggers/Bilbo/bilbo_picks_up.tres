@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://cwdwo67bjtktj"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_ms62y"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_20155"]
+
+[resource]
+script = ExtResource("1_ms62y")
+id = 31
+descriptive_name = "Bilbo picks up item"
+variable_aliases = Dictionary[String, String]({
+"Item": "Item:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

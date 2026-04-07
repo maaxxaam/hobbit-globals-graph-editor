@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://mysse6cf5jnu"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_4qpde"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_y5104"]
+
+[resource]
+script = ExtResource("1_4qpde")
+id = 23
+descriptive_name = "Switch activated"
+variable_aliases = Dictionary[String, String]({
+"Switch": "Switch:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

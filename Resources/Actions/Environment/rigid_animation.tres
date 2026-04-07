@@ -10,21 +10,29 @@ data = Dictionary[String, Variant]({
 })
 metadata/_custom_type_script = "uid://xyuwlss3d5i2"
 
+[sub_resource type="Resource" id="Resource_ipm0l"]
+script = ExtResource("2_edtnf")
+data = Dictionary[String, Variant]({
+"array_id": 3,
+"array_name": "rigids"
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
 [resource]
 script = ExtResource("1_oi1oq")
 id = 33
 descriptive_name = "Start RigidInstance animation"
 variable_params = Dictionary[String, ExtResource("2_edtnf")]({
+"InstanceCount": SubResource("Resource_ipm0l"),
 "Loops": SubResource("Resource_tq0dd")
 })
 type_overrides = Dictionary[String, int]({
 "AnimIndex": 2,
-"Loops": 1,
-"RigidInstance": 5
+"InstanceCount": 8,
+"Loops": 1
 })
 variable_aliases = Dictionary[String, String]({
 "AnimIndex": "Animation index:",
-"Loops": "Play type:",
-"RigidInstance": "RigidInstance:"
+"Loops": "Play type:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

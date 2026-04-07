@@ -22,8 +22,9 @@ func set_value(value: Variant):
 		pass
 
 
-func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, _params: Dictionary):
+func init_component(node: GlobalsGraphNodeBase, _var_name: String, display_name: String, value: Variant, _params: VarParameters):
 	name_label.text = display_name
+	graph_node = node
 	set_value(value)
 
 

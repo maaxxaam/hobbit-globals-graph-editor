@@ -5,10 +5,19 @@
 
 [resource]
 script = ExtResource("1_tdy7e")
-descriptive_name = "NPC spawn info list"
+id = 6
+descriptive_name = "NPC Spawn info"
+type_overrides = Dictionary[String, int]({
+"Animation": 4,
+"FacingGuid": 5,
+"LocationGuid": 5,
+"NPCGuid": 5,
+"SpawnCount": 8
+})
 variable_aliases = Dictionary[String, String]({
-"Facing": "Facing:",
-"Location": "Location:",
-"NPC": "NPC:"
+"Animation": "Animation:",
+"FacingGuid": "Facing:",
+"LocationGuid": "Location:",
+"NPCGuid": "NPC:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

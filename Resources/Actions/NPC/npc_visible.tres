@@ -3,13 +3,24 @@
 [ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_aa05v"]
 [ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_72jkf"]
 
+[sub_resource type="Resource" id="Resource_aa05v"]
+script = ExtResource("2_72jkf")
+data = Dictionary[String, Variant]({
+"array_id": 2,
+"array_name": "npcs"
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
 [resource]
 script = ExtResource("1_aa05v")
 id = 28
 descriptive_name = "Show or hide NPCs"
+variable_params = Dictionary[String, ExtResource("2_72jkf")]({
+"NPCCounter": SubResource("Resource_aa05v")
+})
 type_overrides = Dictionary[String, int]({
 "DoRender": 0,
-"NPCs": 14
+"NPCCount": 8
 })
 variable_aliases = Dictionary[String, String]({
 "DoRender": "Visible?"

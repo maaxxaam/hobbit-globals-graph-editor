@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://7wcfip0j4mmm"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_saqx5"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_1kcdl"]
+
+[sub_resource type="Resource" id="Resource_p11rh"]
+script = ExtResource("2_1kcdl")
+data = Dictionary[String, Variant]({
+"export_suffix": "Guid",
+"order": 0
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
+[resource]
+script = ExtResource("1_saqx5")
+descriptive_name = "Cinema list"
+variable_params = Dictionary[String, ExtResource("2_1kcdl")]({
+"cinema": SubResource("Resource_p11rh")
+})
+type_overrides = Dictionary[String, int]({
+"cinema": 5,
+"cinemaCount": 8
+})
+variable_aliases = Dictionary[String, String]({
+"cinema": "Cinematic:"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"

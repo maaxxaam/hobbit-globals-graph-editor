@@ -5,8 +5,13 @@
 
 [resource]
 script = ExtResource("1_31em1")
+id = 2
 descriptive_name = "NPC list"
+type_overrides = Dictionary[String, int]({
+"NPCCount": 8,
+"NPCGuid": 5
+})
 variable_aliases = Dictionary[String, String]({
-"NPC": "NPC:"
+"NPCGuid": "NPC:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://oe25h67edsji"]
 
+[ext_resource type="Script" uid="uid://bqx02yemywke2" path="res://NodeEditComponents/array_item_component.gd" id="1_eoayh"]
+
 [sub_resource type="Theme" id="Theme_eoayh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vjj7"]
@@ -22,11 +24,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_eoayh")
 theme_override_styles/panel = SubResource("StyleBoxFlat_5vjj7")
+script = ExtResource("1_eoayh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1375044028]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer" unique_id=1247984762]
+[node name="IndexSuffix" type="Label" parent="HBoxContainer" unique_id=1247984762]
 layout_mode = 2
 text = ">"
 
@@ -39,3 +42,8 @@ layout_mode = 2
 
 [node name="StructContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=87852014]
 layout_mode = 2
+
+[node name="RemoveItem" type="Button" parent="HBoxContainer" unique_id=187181666]
+layout_mode = 2
+size_flags_vertical = 4
+text = " ⨯ "

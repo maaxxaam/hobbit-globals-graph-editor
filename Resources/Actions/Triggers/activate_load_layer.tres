@@ -11,6 +11,6 @@ type_overrides = Dictionary[String, int]({
 "LoadLayer": 5
 })
 variable_aliases = Dictionary[String, String]({
-"LoadLayer": "Load layer:"
+"LoadLayerGuid": "Load Layer:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

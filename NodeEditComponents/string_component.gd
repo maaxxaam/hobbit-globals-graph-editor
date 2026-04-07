@@ -22,14 +22,14 @@ func set_value(value: Variant):
 	variable_value = value
 	textbox.text = value
 
-func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, params: Dictionary = default_params):
+func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: String, value: Variant, params: VarParameters = VarParameters.new()):
 	variable_display_name = display_name
 	name_label.text = display_name
 	graph_node = node
 	variable_name = var_name
 	variable_order = graph_node.component_count
-	textbox.max_length = params.get("max_length", default_params["max_length"])
-	textbox.placeholder_text = params.get("placeholder", default_params["placeholder"])
+	textbox.max_length = params.data.get("max_length", default_params["max_length"])
+	textbox.placeholder_text = params.data.get("placeholder", default_params["placeholder"])
 	set_value(value)
 
 

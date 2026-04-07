@@ -18,11 +18,10 @@ variable_params = Dictionary[String, ExtResource("2_ly4qd")]({
 "Team": SubResource("Resource_q0y3i")
 })
 type_overrides = Dictionary[String, int]({
-"CharacterGuid": 5,
 "Team": 2
 })
 variable_aliases = Dictionary[String, String]({
-"Character": "Character:",
+"CharacterGuid": "Character:",
 "Team": "Team:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

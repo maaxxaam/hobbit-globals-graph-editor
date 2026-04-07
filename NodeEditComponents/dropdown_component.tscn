@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://h63wyswvq3b4"]
+[gd_scene format=3 uid="uid://h63wyswvq3b4"]
 
 [ext_resource type="Script" uid="uid://0u37blj56bi1" path="res://NodeEditComponents/dropdown_component.gd" id="1_vpuqh"]
 
-[node name="DropdownComponent" type="HBoxContainer"]
+[node name="DropdownComponent" type="HBoxContainer" unique_id=1086455926]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vpuqh")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=526313146]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="OptionButton" type="OptionButton" parent="." unique_id=1292665614]
 layout_mode = 2
 size_flags_horizontal = 3
 

@@ -9,13 +9,12 @@ id = 4
 descriptive_name = "Replace NPC's state & goal list"
 type_overrides = Dictionary[String, int]({
 "AIStateName": 4,
-"CharacterGuid": 5,
 "GoalListName": 4,
 "OverrideCinematicAnimation": 0
 })
 variable_aliases = Dictionary[String, String]({
 "AIStateName": "AI State Name:",
-"Character": "Character:",
+"CharacterGuid": "Character:",
 "GoalListName": "Goal List Name:",
 "OverrideCinematicAnimation": "Override Cinematic Animation?"
 })

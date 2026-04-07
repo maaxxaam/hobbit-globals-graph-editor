@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ComponentData" format=3 uid="uid://daqj8tgu23l4b"]
+
+[ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_eashs"]
+[ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_6uaxq"]
+
+[resource]
+script = ExtResource("1_eashs")
+id = 26
+descriptive_name = "Character senses Character"
+type_overrides = Dictionary[String, int]({
+"Senses": 0
+})
+variable_aliases = Dictionary[String, String]({
+"CharacterSensed": "Character to check:",
+"NPCSensing": "NPC that senses:",
+"Senses": "Does sense?"
+})
+metadata/_custom_type_script = "uid://bb463g3vg3c13"
