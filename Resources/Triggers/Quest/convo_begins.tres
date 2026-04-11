@@ -7,6 +7,9 @@
 script = ExtResource("1_py0gq")
 id = 10
 descriptive_name = "Conversation begins"
+type_overrides = Dictionary[String, int]({
+"ConversationName": 2
+})
 variable_aliases = Dictionary[String, String]({
 "ConversationName": "Conversation index:"
 })

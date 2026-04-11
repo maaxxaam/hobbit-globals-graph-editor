@@ -1,6 +1,7 @@
 @abstract class_name GlobalsGraphNodeBase extends GraphNode
 
 enum AvailableComponents {
+	# Base Types
 	Boolean,
 	Choice,
 	Integer,
@@ -9,19 +10,16 @@ enum AvailableComponents {
 	GUID,
 	RGBAColor,
 	Link,
+	# Arrays of Structures
+	Counter,
+	Structure,
 	# Generic Arrays
 	ArrayInteger,
 	ArrayFloat,
 	ArrayStr,
 	ArrayGUID,
-	# Specific Arrays
-	ArrayCinema, # just guid
-	ArrayDialog, # just guid
-	ArrayNPC, # just guid
-	ArrayNPCSpawn,
-	ArrayNPCState,
-	ArrayRigid, # just guid
-	ArrayRope,
+	# Helper
+	LinkSlot,
 	Unknown
 }
 
@@ -30,11 +28,15 @@ var graph: GlobalsGraph
 var node_description: LineEdit
 var node_class_index: int = -1
 var type_index: int
-var component_count: int = 0
+var component_count: int:
+	get:
+		return len(components)
 var type_description: Label
 var components: Array[EditComponent]
-var component_params_map: Dictionary # [String, Dictionary]
+var component_storage: ComponentStorage = null
+var component_params_map: Dictionary # [String, VarParameters]
 var component_name_map: Dictionary # [String, String]
+var component_type_type_map: Dictionary # [String, AvailableComponents]
 var component_type_map: Dictionary[AvailableComponents, PackedScene] = {
 	AvailableComponents.Boolean   : preload("res://NodeEditComponents/checkbox_component.tscn"),
 	AvailableComponents.Choice    : preload("res://NodeEditComponents/dropdown_component.tscn"),
@@ -44,6 +46,9 @@ var component_type_map: Dictionary[AvailableComponents, PackedScene] = {
 	AvailableComponents.GUID      : preload("res://NodeEditComponents/guid_component.tscn"),
 	AvailableComponents.RGBAColor : preload("res://NodeEditComponents/rgba_component.tscn"),
 	AvailableComponents.Link      : preload("res://NodeEditComponents/link_component.tscn"),
+	AvailableComponents.LinkSlot  : preload("res://NodeEditComponents/link_slot.tscn"),
+	AvailableComponents.Counter   : preload("res://NodeEditComponents/array_component.tscn"),
+	AvailableComponents.Structure : preload("res://NodeEditComponents/array_item_component.tscn")
 }
 
 func export() -> Dictionary[String, Variant]:
@@ -61,31 +66,35 @@ func link_graph(new_graph: GlobalsGraph):
 	graph = new_graph
 
 
-func add_new_component(component_type: AvailableComponents, component_name: String, params: Dictionary[String, Variant] = {}):
+func get_scene(type: AvailableComponents) -> PackedScene:
+	return component_type_map.get(type)
+
+
+func add_new_component(component_type: AvailableComponents, component_name: String, params: VarParameters = VarParameters.new()):
 	if not component_type_map.has(component_type):
 		push_error("Unrecognized component type %s" % [component_type])
 		return
-	var comp: EditComponent = component_type_map.get(component_type).instantiate()
+	var comp: EditComponent = get_scene(component_type).instantiate()
 	add_child(comp)
-	comp.init_component(self, component_name, component_name_map.get(component_name, component_name), comp.variable_default, component_params_map.get(component_name, {}) if params.is_empty() else params)
+	comp.init_component(self, component_name, component_name_map.get(component_name, component_name), comp.variable_default, params)
 	components.append(comp)
 
 
-func add_parsed_component(component_type: AvailableComponents, component_name: String, value: Variant, params: Dictionary = {}):
+func add_parsed_component(component_type: AvailableComponents, component_name: String, value: Variant, params: VarParameters = VarParameters.new()):
 	if not component_type_map.has(component_type):
-		push_error("Unrecognized component type %s" % [component_type])
+		push_error("Unrecognized component type %s for component %s" % [component_type, component_name])
 		return
 	var comp: EditComponent = component_type_map.get(component_type).instantiate()
 	add_child(comp)
-	comp.init_component(self, component_name, component_name_map.get(component_name, component_name), value, component_params_map.get(component_name, {}) if params.is_empty() else params)
+	comp.init_component(self, component_name, component_name_map.get(component_name, component_name), value, params)
 	components.append(comp)
 
 
 func new_parsed_component(component_type: AvailableComponents, parsed_data: GlobalsParser.ParsedValue):
-	add_parsed_component(component_type, parsed_data.name, parsed_data.value, component_params_map.get(parsed_data.name, {}))
+	add_parsed_component(component_type, parsed_data.name, parsed_data.value, component_params_map.get(parsed_data.name, VarParameters.new()))
 
 
-func find_component(component_name: String):
+func find_component(component_name: String) -> int:
 	return components.find_custom(func(item: EditComponent): return item.variable_name == component_name)
 
 
@@ -94,6 +103,7 @@ func remove_component(component_name: String):
 	if component_index == -1:
 		push_error("Tried to delete component '%s' from node '%s', but that node doesn't have such component" % [component_name, title])
 		return
+	set_slot(component_index, false, 999, Color(), false, 999, Color())
 	components[component_index].queue_free()
 	components.remove_at(component_index)
 
@@ -125,10 +135,18 @@ func _component_default_defaults(type: AvailableComponents) -> Variant:
 	match type:
 		AvailableComponents.Boolean:
 			return false
-		AvailableComponents.Choice, AvailableComponents.Integer:
+		AvailableComponents.Choice, AvailableComponents.Integer, AvailableComponents.Counter:
 			return 0
 		AvailableComponents.Float:
 			return 0.0
+		AvailableComponents.GUID:
+			return "00000000_00000000"
+		AvailableComponents.Str:
+			return ""
+		AvailableComponents.RGBAColor:
+			return [0, 0, 0, 0]
+		AvailableComponents.Structure:
+			return {}
 		_:
 			return null
 
@@ -136,7 +154,7 @@ func _component_default_defaults(type: AvailableComponents) -> Variant:
 func spawn_simple_parsed_components(entries: Array[GlobalsParser.ParsedValue]) -> void:
 	for item in entries:
 		var type := component_type_from_string(item.type)
-		var params: Dictionary = component_params_map.get(item.name, {})
+		var params: VarParameters = component_params_map.get(item.name, VarParameters.new())
 		add_parsed_component(type, item.name, item.value, params)
 
 

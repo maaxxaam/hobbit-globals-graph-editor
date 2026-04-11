@@ -10,6 +10,8 @@ signal paste_requested
 signal undo_requested
 signal redo_requested
 signal new_link_requested
+signal action_spawn_requested(id: int)
+signal trigger_spawn_requested(id: int)
 
 @onready var popup_menu: PopupMenu = $PopupMenu
 @onready var action_submenu: PopupMenu = $PopupMenu/AddActionSubMenu
@@ -30,43 +32,46 @@ var signal_map: Dictionary[int, Signal] = {
 func _ready():
 	popup_menu.set_item_submenu_node(0, trigger_submenu)
 	popup_menu.set_item_submenu_node(1, action_submenu)
-	var key_event: InputEventKey = InputEventKey.new()
 	# New Link
-	key_event.keycode = KEY_L
-	popup_setup_shortcut(key_event, 2)
+	popup_setup_shortcut([KEY_L], 2)
 	# Remove
-	key_event.keycode = KEY_DELETE
-	popup_setup_shortcut(key_event, 12)
+	popup_setup_shortcut([KEY_DELETE], 12)
 	# Undo/Redo
-	key_event.ctrl_pressed = true
-	key_event.command_or_control_autoremap = true # Swaps Ctrl for Command on Mac.
-	key_event.keycode = KEY_Z
-	popup_setup_shortcut(key_event, 4)
-	key_event.keycode = KEY_R
-	popup_setup_shortcut(key_event, 5)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_Z], 4)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_R], 5)
 	# Find
-	key_event.keycode = KEY_F
-	popup_setup_shortcut(key_event, 7)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_F], 7)
 	# Cut/Copy/Paste/Select All
-	key_event.keycode = KEY_X
-	popup_setup_shortcut(key_event, 8)
-	key_event.keycode = KEY_C
-	popup_setup_shortcut(key_event, 9)
-	key_event.keycode = KEY_V
-	popup_setup_shortcut(key_event, 10)
-	key_event.keycode = KEY_A
-	popup_setup_shortcut(key_event, 11)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_X], 8)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_C], 9)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_V], 10)
+	popup_setup_shortcut([KEY_MASK_CMD_OR_CTRL, KEY_A], 11)
+
+	visibility_changed.connect(setup_submenus)
 
 
-func popup_setup_shortcut(key_event: InputEventKey, item_index: int):
+func setup_submenus():
+	action_submenu.populate(graph.action_storage)
+	trigger_submenu.populate(graph.trigger_storage)
+	visibility_changed.disconnect(setup_submenus)
+
+
+func popup_setup_shortcut(keys: Array[int], item_index: int, popup: PopupMenu = popup_menu):
+	var key_event: InputEventKey = InputEventKey.new()
+	for key in keys:
+		match key:
+			KEY_MASK_CMD_OR_CTRL:
+				key_event.ctrl_pressed = true
+				key_event.command_or_control_autoremap = true # Swaps Ctrl for Command on Mac.
+			KEY_MASK_ALT: key_event.alt_pressed = true
+			KEY_MASK_SHIFT: key_event.shift_pressed = true
+			KEY_MASK_META: key_event.meta_pressed = true
+			_: key_event.keycode = (key_event.keycode | key) as Key
 	var shortcut: Shortcut = Shortcut.new()
 	shortcut.events = [key_event.duplicate_deep()]
-	var accel_key: int = key_event.keycode
-	accel_key = accel_key | (int(key_event.ctrl_pressed) * KEY_MASK_CMD_OR_CTRL)
-	accel_key = accel_key | (int(key_event.alt_pressed) * KEY_MASK_ALT)
-	accel_key = accel_key | (int(key_event.shift_pressed) * KEY_MASK_SHIFT)
-	popup_menu.set_item_accelerator(item_index, accel_key)
-	popup_menu.set_item_shortcut(item_index, shortcut, true)
+	var accel_key: int = keys.reduce(func(accum: int, item: int): return accum | item)
+	popup.set_item_accelerator(item_index, accel_key)
+	popup.set_item_shortcut(item_index, shortcut, true)
 
 
 func _on_visibility_changed():

@@ -7,6 +7,10 @@
 script = ExtResource("1_ljn77")
 id = 34
 descriptive_name = "RigidInstance animation is playing"
+type_overrides = Dictionary[String, int]({
+"Animation": 2,
+"RigidInstance": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Animation": "Animation index:",
 "RigidInstance": "RigidInstance:"

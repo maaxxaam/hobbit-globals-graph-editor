@@ -2,7 +2,7 @@ class_name DropdownComponent extends EditComponent
 
 var options: OptionButton
 var name_text: Label
-var option_mapping: Dictionary[int, String]
+var option_mapping: Dictionary # Dictionary[int, String]
 var default_params: Dictionary[String, Variant] = {
 	"options": ["Enabled", "Disabled", "Permanently Enabled", "Permanently Disabled"]
 }

@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bln4a20janorg"]
+[gd_scene format=3 uid="uid://bln4a20janorg"]
 
 [ext_resource type="Script" uid="uid://dnebbevotykbh" path="res://trigger.gd" id="1_r7rtx"]
+[ext_resource type="StyleBox" uid="uid://cy7cikkkao3ov" path="res://UI/Styles/NodePanelSelected.tres" id="1_setfl"]
 
-[node name="Trigger" type="GraphNode" groups=["GlobalsGraphNodeBase", "TriggerNode"]]
+[node name="Trigger" type="GraphNode" unique_id=1942443161 groups=["GlobalsGraphNodeBase", "TriggerNode"]]
 offset_right = 91.0
 offset_bottom = 78.0
 mouse_filter = 1
+theme_override_styles/panel_selected = ExtResource("1_setfl")
 position_offset = Vector2(24, 40)
 title = "Trigger351"
 slot/0/left_enabled = false
@@ -46,29 +48,29 @@ slot/3/right_icon = null
 slot/3/draw_stylebox = true
 script = ExtResource("1_r7rtx")
 
-[node name="TriggerName" type="LineEdit" parent="."]
+[node name="TriggerName" type="LineEdit" parent="." unique_id=1069380181]
 layout_mode = 2
 placeholder_text = "Enter Trigger Name..."
 expand_to_text_length = true
 
-[node name="HSeparator2" type="HSeparator" parent="."]
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=1098384622]
 layout_mode = 2
 
-[node name="TriggerType" type="HBoxContainer" parent="."]
+[node name="TriggerType" type="HBoxContainer" parent="." unique_id=1902031652]
 layout_mode = 2
 
-[node name="TypeIcon" type="TextureRect" parent="TriggerType"]
+[node name="TypeIcon" type="TextureRect" parent="TriggerType" unique_id=458306566]
 layout_mode = 2
 expand_mode = 5
 stretch_mode = 4
 
-[node name="TypeDesc" type="Label" parent="TriggerType"]
+[node name="TypeDesc" type="Label" parent="TriggerType" unique_id=341138591]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ChangeType" type="Button" parent="TriggerType"]
+[node name="ChangeType" type="Button" parent="TriggerType" unique_id=915339370]
 layout_mode = 2
 text = " Edit "
 
-[node name="HSeparator3" type="HSeparator" parent="."]
+[node name="HSeparator3" type="HSeparator" parent="." unique_id=1617316702]
 layout_mode = 2

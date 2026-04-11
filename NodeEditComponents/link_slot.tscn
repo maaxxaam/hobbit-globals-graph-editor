@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://ca61oxyrwqmi2"]
+
+[ext_resource type="Script" uid="uid://d380xb75ocqf5" path="res://NodeEditComponents/link_slot.gd" id="1_yqawn"]
+
+[node name="LinkSlot" type="HBoxContainer" unique_id=103427747]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+script = ExtResource("1_yqawn")
+
+[node name="GoToTrigger" type="Button" parent="." unique_id=163085202]
+layout_mode = 2
+text = "←"
+
+[node name="TriggerName" type="Label" parent="." unique_id=1496530126]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Trigger999"
+text_overrun_behavior = 5
+
+[node name="ActionName" type="Label" parent="." unique_id=1543500542]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Action999"
+horizontal_alignment = 2
+text_overrun_behavior = 5
+
+[node name="GoToAction" type="Button" parent="." unique_id=947917447]
+layout_mode = 2
+text = "→"
+
+[connection signal="pressed" from="GoToTrigger" to="." method="_on_go_to_trigger_pressed"]
+[connection signal="pressed" from="GoToAction" to="." method="_on_go_to_action_pressed"]

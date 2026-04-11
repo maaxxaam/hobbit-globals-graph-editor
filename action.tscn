@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://blq6funnkillg"]
+[gd_scene format=3 uid="uid://blq6funnkillg"]
 
 [ext_resource type="Script" uid="uid://b31uw58dxk4t5" path="res://action.gd" id="1_a2i7p"]
+[ext_resource type="StyleBox" uid="uid://cy7cikkkao3ov" path="res://UI/Styles/NodePanelSelected.tres" id="1_gjv8x"]
 
-[node name="Action" type="GraphNode" groups=["ActionNode", "GlobalsGraphNodeBase"]]
+[node name="Action" type="GraphNode" unique_id=1490631133 groups=["ActionNode", "GlobalsGraphNodeBase"]]
 offset_right = 86.0
 offset_bottom = 78.0
 mouse_filter = 1
+theme_override_styles/panel_selected = ExtResource("1_gjv8x")
 position_offset = Vector2(457, 51)
 title = "Action102"
 ignore_invalid_connection_type = true
@@ -47,29 +49,29 @@ slot/3/right_icon = null
 slot/3/draw_stylebox = true
 script = ExtResource("1_a2i7p")
 
-[node name="ActionName" type="LineEdit" parent="."]
+[node name="ActionName" type="LineEdit" parent="." unique_id=1527777697]
 layout_mode = 2
 placeholder_text = "Enter Action name..."
 expand_to_text_length = true
 
-[node name="HSeparator2" type="HSeparator" parent="."]
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=1867799500]
 layout_mode = 2
 
-[node name="ActionType" type="HBoxContainer" parent="."]
+[node name="ActionType" type="HBoxContainer" parent="." unique_id=1585680133]
 layout_mode = 2
 
-[node name="TypeIcon" type="TextureRect" parent="ActionType"]
+[node name="TypeIcon" type="TextureRect" parent="ActionType" unique_id=1712083643]
 layout_mode = 2
 expand_mode = 5
 stretch_mode = 4
 
-[node name="TypeDesc" type="Label" parent="ActionType"]
+[node name="TypeDesc" type="Label" parent="ActionType" unique_id=1337189099]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ChangeType" type="Button" parent="ActionType"]
+[node name="ChangeType" type="Button" parent="ActionType" unique_id=1990935878]
 layout_mode = 2
 text = " Edit "
 
-[node name="HSeparator3" type="HSeparator" parent="."]
+[node name="HSeparator3" type="HSeparator" parent="." unique_id=1272395200]
 layout_mode = 2

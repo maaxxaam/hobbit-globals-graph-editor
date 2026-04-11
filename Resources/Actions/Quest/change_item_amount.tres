@@ -19,11 +19,14 @@ variable_params = Dictionary[String, ExtResource("2_glhu6")]({
 })
 type_overrides = Dictionary[String, int]({
 "Add": 1,
-"Amount": 2
+"Amount": 2,
+"Item": 4,
+"SourceGuid": 5
 })
 variable_aliases = Dictionary[String, String]({
 "Add": "Add or remove?",
 "Amount": "Amount:",
-"SourceGuid": "Item:"
+"Item": "Item:",
+"SourceGuid": "Item source:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

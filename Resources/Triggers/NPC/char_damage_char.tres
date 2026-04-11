@@ -8,6 +8,8 @@ script = ExtResource("1_2c4xl")
 id = 20
 descriptive_name = "Character damages character"
 type_overrides = Dictionary[String, int]({
+"Damaged": 5,
+"Damager": 5,
 "PainType": 2
 })
 variable_aliases = Dictionary[String, String]({

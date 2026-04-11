@@ -8,6 +8,7 @@ script = ExtResource("1_vojf6")
 id = 18
 descriptive_name = "World trigger toggled"
 type_overrides = Dictionary[String, int]({
+"Trigger": 5,
 "TriggerToggle": 0
 })
 variable_aliases = Dictionary[String, String]({

@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c61pvpljw8vl1"]
+[gd_scene format=3 uid="uid://c61pvpljw8vl1"]
 
 [ext_resource type="Script" uid="uid://dxsvsp61v5x4y" path="res://link.gd" id="1_hqdcc"]
+[ext_resource type="StyleBox" uid="uid://cy7cikkkao3ov" path="res://UI/Styles/NodePanelSelected.tres" id="1_hwd60"]
 
-[node name="Link" type="GraphNode" groups=["GlobalsGraphNodeBase", "LinkNode"]]
-offset_right = 69.0
+[node name="Link" type="GraphNode" unique_id=892924756 groups=["GlobalsGraphNodeBase", "LinkNode"]]
+offset_right = 600.0
 offset_bottom = 78.0
 size_flags_horizontal = 3
 mouse_filter = 1
+theme_override_styles/panel_selected = ExtResource("1_hwd60")
 position_offset = Vector2(257, 103)
 title = "Link204"
 script = ExtResource("1_hqdcc")
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

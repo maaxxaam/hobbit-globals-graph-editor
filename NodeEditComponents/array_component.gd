@@ -54,7 +54,6 @@ func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: 
 	name_label.text = variable_display_name
 
 	# Value here is supposed to be Array[Dictionary]
-	prints("array:", value)
 	for item in (value as Array):
 		add_item(item)
 

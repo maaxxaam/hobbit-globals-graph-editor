@@ -19,6 +19,8 @@ variable_params = Dictionary[String, ExtResource("2_nevt4")]({
 "NPCCount": SubResource("Resource_88n86")
 })
 type_overrides = Dictionary[String, int]({
+"EnterState": 2,
+"ExitState": 2,
 "NPCCount": 8
 })
 variable_aliases = Dictionary[String, String]({

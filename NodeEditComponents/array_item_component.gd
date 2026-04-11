@@ -32,7 +32,6 @@ func set_value(value: Variant):
 func add_field(field_type: GlobalsGraphNodeBase.AvailableComponents, key: String, field_value: Variant):
 	var new_scene: PackedScene = graph_node.get_scene(field_type)
 	var new_item: EditComponent = new_scene.instantiate()
-	prints("kv:", key, field_value)
 	container.add_child(new_item)
 	new_item.init_component(graph_node, key, aliases.get(key, key), field_value, parameters.get(key, VarParameters.new()))
 	(variable_value as Dictionary).set(key, field_value)
@@ -58,7 +57,6 @@ func init_component(node: GlobalsGraphNodeBase, var_name: String, display_name: 
 	type_map = array_info.type_overrides
 	aliases = array_info.variable_aliases
 
-	prints("item:", value)
 	for key in type_map.keys():
 		if type_map[key] == GlobalsGraphNodeBase.AvailableComponents.Counter:
 			continue

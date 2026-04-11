@@ -8,7 +8,9 @@ script = ExtResource("1_vu5n8")
 id = 42
 descriptive_name = "Swap two NPCs"
 type_overrides = Dictionary[String, int]({
-"Do180Flip": 0
+"Do180Flip": 0,
+"NPC1": 5,
+"NPC2": 5
 })
 variable_aliases = Dictionary[String, String]({
 "Do180Flip": "Flip Character 180 along XZ?",

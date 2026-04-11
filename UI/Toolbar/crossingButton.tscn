@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ca8t7mmy3hlbw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jv8w7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="CrossingButton" type="Button" unique_id=1181479872]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jv8w7")
+toggle_mode = true
+text = " ⤼ "

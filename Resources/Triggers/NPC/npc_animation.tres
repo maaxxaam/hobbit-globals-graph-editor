@@ -7,6 +7,10 @@
 script = ExtResource("1_i6o0i")
 id = 15
 descriptive_name = "On NPC's animation"
+type_overrides = Dictionary[String, int]({
+"AnimationName": 4,
+"Character": 5
+})
 variable_aliases = Dictionary[String, String]({
 "AnimationName": "Animation name:",
 "Character": "NPC:"

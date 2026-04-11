@@ -7,6 +7,9 @@
 script = ExtResource("1_hap8w")
 id = 21
 descriptive_name = "Cutscene starts"
+type_overrides = Dictionary[String, int]({
+"Cinema": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Cinema": "Cinema:"
 })

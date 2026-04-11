@@ -7,6 +7,10 @@
 script = ExtResource("1_qi200")
 id = 25
 descriptive_name = "Object is in Volume"
+type_overrides = Dictionary[String, int]({
+"Object": 5,
+"Volume": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Object": "Object:",
 "Volume": "Volume:"

@@ -8,11 +8,13 @@ script = ExtResource("1_eashs")
 id = 26
 descriptive_name = "Character senses Character"
 type_overrides = Dictionary[String, int]({
-"Senses": 0
+"CharacterSensed": 5,
+"NPCSensing": 5,
+"Senses": 2
 })
 variable_aliases = Dictionary[String, String]({
 "CharacterSensed": "Character to check:",
 "NPCSensing": "NPC that senses:",
-"Senses": "Does sense?"
+"Senses": "Senses to check:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

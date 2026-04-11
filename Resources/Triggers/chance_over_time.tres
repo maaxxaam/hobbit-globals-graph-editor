@@ -28,6 +28,10 @@ variable_params = Dictionary[String, ExtResource("2_j1ssr")]({
 "CheckTime": SubResource("Resource_pxlu6"),
 "RandomPercent": SubResource("Resource_j1ssr")
 })
+type_overrides = Dictionary[String, int]({
+"CheckTime": 3,
+"RandomPercent": 2
+})
 variable_aliases = Dictionary[String, String]({
 "CheckTime": "Time between checks:",
 "RandomPercent": "Chance to trigger:"

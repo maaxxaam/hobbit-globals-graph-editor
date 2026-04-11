@@ -7,6 +7,9 @@
 script = ExtResource("1_ykgag")
 id = 1
 descriptive_name = "Bilbo has enough gold"
+type_overrides = Dictionary[String, int]({
+"Amount": 2
+})
 variable_aliases = Dictionary[String, String]({
 "Amount": "Amount:"
 })

@@ -8,6 +8,7 @@ script = ExtResource("1_nucm0")
 id = 14
 descriptive_name = "Switch in state"
 type_overrides = Dictionary[String, int]({
+"Switch": 5,
 "SwitchValue": 0
 })
 variable_aliases = Dictionary[String, String]({

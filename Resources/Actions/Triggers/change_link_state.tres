@@ -24,6 +24,7 @@ type_overrides = Dictionary[String, int]({
 })
 variable_aliases = Dictionary[String, String]({
 "Dialog": "Dialog name:",
+"Link": "Link:",
 "LinkState": "To state:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

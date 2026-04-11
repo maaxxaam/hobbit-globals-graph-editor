@@ -4,7 +4,11 @@
 [ext_resource type="Script" uid="uid://w1otgtqtixx5" path="res://globals_graph_edit.gd" id="1_kwhh3"]
 [ext_resource type="Script" uid="uid://copqjihvnqrjh" path="res://main_screen_window.gd" id="1_ywh4s"]
 [ext_resource type="PackedScene" uid="uid://ble1btn658ycj" path="res://find_node.tscn" id="4_kwhh3"]
+[ext_resource type="Script" uid="uid://cmnpm7llyvgyi" path="res://UI/Popups/file_popup.gd" id="4_ue4rx"]
 [ext_resource type="PackedScene" uid="uid://xlueu8tns7jf" path="res://error_box.tscn" id="5_4sclt"]
+[ext_resource type="Script" uid="uid://bfjoho24lphdt" path="res://UI/Popups/option_popup.gd" id="5_4sv2p"]
+[ext_resource type="Script" uid="uid://ciuvidu5ga85f" path="res://UI/Popups/help_popup.gd" id="6_4sv2p"]
+[ext_resource type="Script" uid="uid://ck333l1cksvo1" path="res://UI/Popups/open_file_dialog.gd" id="8_sjiej"]
 
 [node name="MainWindow" type="Control" unique_id=1054137459]
 layout_mode = 3
@@ -16,6 +20,8 @@ layout_mode = 1
 offset_top = 32.0
 offset_right = 1000.0
 offset_bottom = 600.0
+panning_scheme = 1
+show_arrange_button = false
 script = ExtResource("1_kwhh3")
 
 [node name="RMB_Popup" parent="." unique_id=1598337878 instance=ExtResource("1_4sclt")]
@@ -27,7 +33,7 @@ layout_mode = 0
 offset_right = 1000.0
 offset_bottom = 32.0
 
-[node name="File" type="PopupMenu" parent="MenuBar" unique_id=23150246]
+[node name="File" type="PopupMenu" parent="MenuBar" unique_id=223519753 node_paths=PackedStringArray("main_window", "graph")]
 oversampling_override = 1.0
 size = Vector2i(111, 143)
 item_count = 5
@@ -41,22 +47,36 @@ item_3/text = "Save as..."
 item_3/id = 3
 item_4/text = "Exit"
 item_4/id = 4
+script = ExtResource("4_ue4rx")
+main_window = NodePath("../..")
+graph = NodePath("../../GraphEdit")
+metadata/_custom_type_script = "uid://b0uf62eucg2ln"
 
-[node name="Options" type="PopupMenu" parent="MenuBar" unique_id=1956310024]
+[node name="Options" type="PopupMenu" parent="MenuBar" unique_id=1468154450 node_paths=PackedStringArray("main_window", "graph")]
 oversampling_override = 1.0
 size = Vector2i(153, 100)
-item_count = 2
+item_count = 3
 item_0/text = "Editor Settings"
 item_0/id = 0
-item_1/text = "Known GUIDs"
-item_1/id = 1
+item_1/text = "Shortcuts"
+item_1/id = 2
+item_2/text = "Known GUIDs"
+item_2/id = 1
+script = ExtResource("5_4sv2p")
+main_window = NodePath("../..")
+graph = NodePath("../../GraphEdit")
+metadata/_custom_type_script = "uid://b0uf62eucg2ln"
 
-[node name="Help" type="PopupMenu" parent="MenuBar" unique_id=81323778]
+[node name="Help" type="PopupMenu" parent="MenuBar" unique_id=1310518495 node_paths=PackedStringArray("main_window", "graph")]
 item_count = 2
 item_0/text = "Manual"
 item_0/id = 0
 item_1/text = "About"
 item_1/id = 1
+script = ExtResource("6_4sv2p")
+main_window = NodePath("../..")
+graph = NodePath("../../GraphEdit")
+metadata/_custom_type_script = "uid://b0uf62eucg2ln"
 
 [node name="FindNode" parent="." unique_id=1562316959 instance=ExtResource("4_kwhh3")]
 visible = false
@@ -77,6 +97,26 @@ grow_vertical = 1
 visible = false
 layout_mode = 0
 
+[node name="OpenFile" type="FileDialog" parent="." unique_id=208912485 node_paths=PackedStringArray("graph")]
+title = "Open a File"
+file_mode = 0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.json", "*.txt", "*.export")
+use_native_dialog = true
+script = ExtResource("8_sjiej")
+graph = NodePath("../GraphEdit")
+
+[node name="SaveFile" type="FileDialog" parent="." unique_id=116804195]
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.json", "*.txt", "*.export")
+
+[node name="NotifyUser" type="AcceptDialog" parent="." unique_id=759313735]
+oversampling_override = 1.0
+title = "Important message"
+
+[connection signal="child_entered_tree" from="GraphEdit" to="GraphEdit" method="_on_child_entered_tree"]
 [connection signal="connection_drag_started" from="GraphEdit" to="GraphEdit" method="_on_connection_drag_started"]
 [connection signal="connection_from_empty" from="GraphEdit" to="GraphEdit" method="_on_connection_from_empty"]
 [connection signal="connection_request" from="GraphEdit" to="GraphEdit" method="_on_connection_request"]
@@ -90,3 +130,9 @@ layout_mode = 0
 [connection signal="node_selected" from="GraphEdit" to="GraphEdit" method="_on_node_selected"]
 [connection signal="paste_nodes_request" from="GraphEdit" to="GraphEdit" method="_on_paste_nodes_request"]
 [connection signal="popup_request" from="GraphEdit" to="GraphEdit" method="_on_popup_request"]
+[connection signal="visibility_changed" from="FindNode" to="." method="_on_find_node_visibility_changed"]
+[connection signal="visibility_changed" from="ErrorBox" to="." method="_on_error_box_visibility_changed"]
+[connection signal="file_selected" from="OpenFile" to="OpenFile" method="_on_file_selected"]
+[connection signal="visibility_changed" from="OpenFile" to="." method="_on_open_file_visibility_changed"]
+[connection signal="visibility_changed" from="SaveFile" to="." method="_on_save_file_visibility_changed"]
+[connection signal="visibility_changed" from="NotifyUser" to="." method="_on_notify_user_visibility_changed"]

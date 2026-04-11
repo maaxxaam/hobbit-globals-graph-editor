@@ -22,8 +22,11 @@ func _ready():
 
 func set_value(value: Variant):
 	if value is not int:
-		push_error("Expected int on assignment to value '%s', got %s" % [variable_name, type_string(typeof(value))])
-		return
+		if value is float and (value - int(value)) == 0.0:
+			value = int(value)
+		else:
+			push_error("Expected int on assignment to value '%s', got %s" % [variable_name, type_string(typeof(value))])
+			return
 	variable_value = value
 	numberbox.set_value_no_signal(value)
 

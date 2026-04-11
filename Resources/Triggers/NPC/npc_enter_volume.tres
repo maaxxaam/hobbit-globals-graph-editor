@@ -19,7 +19,9 @@ variable_params = Dictionary[String, ExtResource("2_d55n7")]({
 })
 type_overrides = Dictionary[String, int]({
 "AllNPCs": 1,
-"TriggersOnce": 0
+"Character": 5,
+"TriggersOnce": 0,
+"Volume": 5
 })
 variable_aliases = Dictionary[String, String]({
 "AllNPCs": "Who enters:",

@@ -24,6 +24,8 @@ func set_value(value: Variant):
 	if value is not String:
 		push_error("Expected String on assignment to value '%s', got %s" % [variable_name, type_string(typeof(value))])
 		return
+	if len(value as String) == 16:
+		value = (value as String).substr(0, 8) + "_" + (value as String).substr(8)
 	variable_value = value
 	text.text = variable_value
 	text.caret_column = caret_now

@@ -28,12 +28,17 @@ GlobalsParser="*res://globals_parser.gd"
 window/subwindows/embed_subwindows=false
 display_server/driver.linuxbsd="wayland"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [global_group]
 
 LinkNode="All the link nodes in the editor"
 ActionNode="All the Action nodes in the editor"
 TriggerNode="All the triggers in the editor"
 GlobalsGraphNodeBase=""
+ConnectionLine="Collection of lines connecting the ports"
 
 [rendering]
 

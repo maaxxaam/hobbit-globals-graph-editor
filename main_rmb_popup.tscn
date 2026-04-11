@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cens3gp2ovpla"]
+[gd_scene format=3 uid="uid://cens3gp2ovpla"]
 
 [ext_resource type="Script" uid="uid://batqmwkaf10dc" path="res://main_rmb.gd" id="1_0gavk"]
+[ext_resource type="Script" uid="uid://cyavs3l4kssvk" path="res://UI/Popups/action_popup.gd" id="2_7orsr"]
+[ext_resource type="Script" uid="uid://c7m6lfoh7acyq" path="res://UI/Popups/trigger_popup.gd" id="3_jglsv"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1079879820]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0gavk")
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=1070243892]
 oversampling_override = 1.0
 size = Vector2i(127, 309)
 item_count = 13
@@ -42,20 +44,60 @@ item_11/id = 7
 item_12/text = "Remove"
 item_12/id = 8
 
-[node name="AddActionSubMenu" type="PopupMenu" parent="PopupMenu"]
-item_count = 1
-item_0/text = "Hide/Show RigidInstance"
-item_0/id = 0
+[node name="AddActionSubMenu" type="PopupMenu" parent="PopupMenu" unique_id=1943813431]
+item_count = 6
+item_0/text = "AI"
+item_0/id = 999
+item_1/text = "Cutscene"
+item_1/id = 999
+item_2/text = "Environment"
+item_2/id = 999
+item_3/text = "NPC"
+item_3/id = 999
+item_4/text = "Quest"
+item_4/id = 999
+item_5/text = "Triggers"
+item_5/id = 999
+script = ExtResource("2_7orsr")
 
-[node name="AddTriggerSubMenu" type="PopupMenu" parent="PopupMenu"]
-item_count = 3
-item_0/text = "Quest Completed"
-item_0/id = 0
-item_1/text = "Stone thrown at NPC"
-item_1/id = 1
-item_2/text = "Using a rope"
-item_2/id = 2
+[node name="AI" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=1609326786]
+
+[node name="Cutscene" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=310065380]
+
+[node name="Environment" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=1635343806]
+
+[node name="NPC" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=1350153433]
+
+[node name="Quest" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=1026790170]
+
+[node name="Triggers" type="PopupMenu" parent="PopupMenu/AddActionSubMenu" unique_id=834687651]
+
+[node name="AddTriggerSubMenu" type="PopupMenu" parent="PopupMenu" unique_id=211649243]
+item_count = 5
+item_0/text = "AI"
+item_0/id = 999
+item_1/text = "Bilbo"
+item_1/id = 999
+item_2/text = "Environment"
+item_2/id = 999
+item_3/text = "NPC"
+item_3/id = 999
+item_4/text = "Quest"
+item_4/id = 999
+script = ExtResource("3_jglsv")
+
+[node name="AI" type="PopupMenu" parent="PopupMenu/AddTriggerSubMenu" unique_id=677911600]
+
+[node name="Bilbo" type="PopupMenu" parent="PopupMenu/AddTriggerSubMenu" unique_id=692824976]
+
+[node name="Environment" type="PopupMenu" parent="PopupMenu/AddTriggerSubMenu" unique_id=176838800]
+
+[node name="NPC" type="PopupMenu" parent="PopupMenu/AddTriggerSubMenu" unique_id=466624538]
+
+[node name="Quest" type="PopupMenu" parent="PopupMenu/AddTriggerSubMenu" unique_id=1287862053]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
 [connection signal="popup_hide" from="PopupMenu" to="." method="_on_popup_menu_popup_hide"]
+[connection signal="id_pressed" from="PopupMenu/AddActionSubMenu" to="PopupMenu/AddActionSubMenu" method="_on_id_pressed"]
+[connection signal="id_pressed" from="PopupMenu/AddActionSubMenu/AI" to="PopupMenu/AddActionSubMenu" method="_on_submenu_id_pressed"]

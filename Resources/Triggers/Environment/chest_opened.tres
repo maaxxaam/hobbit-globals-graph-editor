@@ -7,6 +7,9 @@
 script = ExtResource("1_h82ir")
 id = 4
 descriptive_name = "On chest opened"
+type_overrides = Dictionary[String, int]({
+"Chest": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Chest": "Chest:"
 })

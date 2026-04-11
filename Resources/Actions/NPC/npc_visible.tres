@@ -16,7 +16,7 @@ script = ExtResource("1_aa05v")
 id = 28
 descriptive_name = "Show or hide NPCs"
 variable_params = Dictionary[String, ExtResource("2_72jkf")]({
-"NPCCounter": SubResource("Resource_aa05v")
+"NPCCount": SubResource("Resource_aa05v")
 })
 type_overrides = Dictionary[String, int]({
 "DoRender": 0,

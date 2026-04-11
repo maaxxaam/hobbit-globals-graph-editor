@@ -62,7 +62,7 @@ func _on_find_next_pressed():
 func find():
 	var result := perform_search(query_box.text, case_flag.button_pressed, regex_flag.button_pressed)
 	if result != null:
-		graph.scroll_offset = result.position_offset + (result.size / 2.0) - graph.get_viewport_rect().get_center()
+		graph.scroll_to_element(result)
 
 
 func _on_find_close_pressed():

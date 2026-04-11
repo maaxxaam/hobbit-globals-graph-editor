@@ -7,7 +7,11 @@
 script = ExtResource("1_5ccrp")
 id = 1
 descriptive_name = "Dialog list"
+type_overrides = Dictionary[String, int]({
+"DialogCount": 8,
+"DialogName": 4
+})
 variable_aliases = Dictionary[String, String]({
-"Dialog": "Dialog name:"
+"DialogName": "Dialog name:"
 })
 metadata/_custom_type_script = "uid://bb463g3vg3c13"

@@ -7,6 +7,9 @@
 script = ExtResource("1_80yjy")
 id = 12
 descriptive_name = "When web is torn"
+type_overrides = Dictionary[String, int]({
+"Web": 5
+})
 variable_aliases = Dictionary[String, String]({
 "Web": "Web:"
 })

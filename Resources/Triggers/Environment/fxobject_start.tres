@@ -6,7 +6,10 @@
 [resource]
 script = ExtResource("1_1mter")
 id = 27
-descriptive_name = "FXObject starts"
+descriptive_name = "FXObject starts (UNUSED)"
+type_overrides = Dictionary[String, int]({
+"FXObject": 2
+})
 variable_aliases = Dictionary[String, String]({
 "FXObject": "FXObject index:"
 })

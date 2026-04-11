@@ -7,6 +7,10 @@
 script = ExtResource("1_li856")
 id = 17
 descriptive_name = "NPC begins goallist"
+type_overrides = Dictionary[String, int]({
+"GoalListName": 4,
+"NPC": 5
+})
 variable_aliases = Dictionary[String, String]({
 "GoalListName": "Goal list name:",
 "NPC": "NPC:"

@@ -1,15 +1,24 @@
 [gd_scene format=3 uid="uid://b8isd6ekw70br"]
 
+[ext_resource type="Script" uid="uid://bk3yrxyga6qtf" path="res://NodeEditComponents/link_component.gd" id="1_wdq2i"]
+
 [node name="LinkComponent" type="HBoxContainer" unique_id=386470965]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wdq2i")
 
-[node name="SpinBox" type="SpinBox" parent="." unique_id=939197573]
+[node name="LinkLabel" type="Label" parent="." unique_id=951020985]
 layout_mode = 2
-rounded = true
-allow_greater = true
-prefix = "Link"
-select_all_on_focus = true
+text = "Link999"
+
+[node name="LinkName" type="Label" parent="." unique_id=1944761639]
+layout_mode = 2
+
+[node name="ShowButton" type="Button" parent="." unique_id=497583156]
+layout_mode = 2
+text = " ← "
+
+[connection signal="pressed" from="ShowButton" to="." method="_on_show_button_pressed"]

@@ -3,12 +3,32 @@
 [ext_resource type="Script" uid="uid://bb463g3vg3c13" path="res://Resources/ComponentData.gd" id="1_72xnb"]
 [ext_resource type="Script" uid="uid://xyuwlss3d5i2" path="res://Resources/VarParams.gd" id="2_3k05f"]
 
+[sub_resource type="Resource" id="Resource_8s7ii"]
+script = ExtResource("2_3k05f")
+data = Dictionary[String, Variant]({
+"options": {
+1: "Sword",
+2: "Stick",
+3: "Stone/Explosive stone",
+4: "Sword w/ Shield Break",
+5: "Stick w/ Knockback",
+10: "Web attack (CUT)",
+18: "Freeze stone",
+19: "Fire stone"
+}
+})
+metadata/_custom_type_script = "uid://xyuwlss3d5i2"
+
 [resource]
 script = ExtResource("1_72xnb")
 id = 6
-descriptive_name = "Stone hits NPC"
+descriptive_name = "NPC damaged by player"
+variable_params = Dictionary[String, ExtResource("2_3k05f")]({
+"AttackType": SubResource("Resource_8s7ii")
+})
 type_overrides = Dictionary[String, int]({
-"AttackType": 1
+"AttackType": 1,
+"NPC": 5
 })
 variable_aliases = Dictionary[String, String]({
 "AttackType": "Attack type:",
